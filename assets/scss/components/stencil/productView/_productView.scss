@@ -145,6 +145,10 @@
 .productView-title {
     font-size: fontSize("small");
     margin: -(spacing("half")) 0 spacing("quarter");
+    font-size: fontSize("small") * 0.9;
+    line-height: lineHeight("small");
+    letter-spacing: 0;
+    font-weight: fontWeight("semibold");
 
     @include breakpoint("medium") {
         margin-top: spacing("single");
@@ -179,8 +183,15 @@
 // -----------------------------------------------------------------------------
 
 .productView-price {
-    font-size: fontSize("smaller");
     margin-bottom: spacing("third");
+    font-size: fontSize("small") * 0.9;
+    line-height: lineHeight("small");
+    letter-spacing: 0;
+    font-weight: fontWeight("semibold");
+    text-transform: uppercase;
+    color: stencilColor('navUser-color');
+    font-weight: fontWeight("bold");
+    margin: stencilNumber("padding-small") 0;
 
     @include breakpoint("medium") {
         font-size: fontSize("larger");
@@ -331,6 +342,41 @@
         }
     }
 
+    [data-product-option-change] {
+        & > .form-field {
+            display: none;
+        }
+
+        .form-field[data-product-attribute="set-rectangle"] {
+            display: block;
+            text-align: left;
+            margin-bottom: stencilNumber("padding-small");
+
+            .form-label {
+                text-align: left;
+                font-weight: fontWeight("bold");
+                margin-top: stencilNumber("padding-normal");
+                margin-bottom: stencilNumber("padding-small") * .5;
+            }
+            input[type="radio"] + label {
+                margin-left: 0rem;
+                margin-right: 0.5rem;
+            }
+            .form-option span {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 4px 8px 4px;
+                min-width: unset;
+                font-weight: bold;
+            }
+            .form-radio:checked + .form-option {
+                background: #0a0a0a;
+                color: #fff;
+            }
+        }
+    }
+
     .form-action {
 
         @include breakpoint("small") {
@@ -353,6 +399,16 @@
         // scss-lint:disable SelectorDepth, NestingDepth
         .button {
             width: 100%;
+            font-size: $fontSize-base;
+            background-color: stencilColor("navUser-color");
+            color: stencilColor("color-white");
+            border: remCalc(2) solid stencilColor("navUser-color");
+            font-weight: fontWeight("bold");
+            letter-spacing: normal;
+            text-transform: uppercase;
+            padding: stencilNumber("padding-normal");
+            margin: stencilNumber("padding-normal") 0;
+            box-shadow: 0 remCalc(2) remCalc(5) 0 rgba(0,0,0,.16);
 
             @include breakpoint("large") {
                 margin-right: spacing("half");

@@ -8,6 +8,81 @@
         {{/if}}
     {{/each}}
 
+    
+
+    <section class="productView-images" data-image-gallery>
+        <figure class="productView-image"
+                data-image-gallery-main
+                {{#if product.main_image}}
+                data-zoom-image="{{getImage product.main_image 'zoom_size' (cdn theme_settings.default_image_product)}}"
+                {{/if}}
+                >
+            <div class="productView-img-container">
+                {{!-- Remove the surrounding a-element if there is no main image. --}}
+                {{#if product.main_image}}
+                    <a href="{{getImage product.main_image 'zoom_size' (cdn theme_settings.default_image_product)}}">
+                {{/if}}
+
+                <img class="productView-image--default lazyload"
+                     data-sizes="auto"
+                     src="{{cdn 'img/loading.svg'}}"
+                     data-src="{{getImage product.main_image 'product_size' (cdn theme_settings.default_image_product)}}"
+                     alt="{{product.main_image.alt}}" title="{{product.main_image.alt}}" data-main-image>
+
+                {{#if product.main_image}}
+                    </a>
+                {{/if}}
+            </div>
+        </figure>
+        <ul class="productView-thumbnails"{{#gt product.images.length 5}} data-slick='{
+                "infinite": false,
+                "mobileFirst": true,
+                "slidesToShow": 5,
+                "slidesToScroll": 1
+            }'{{/gt}}>
+            {{#each product.images}}
+                <li class="productView-thumbnail">
+                    <a
+                        class="productView-thumbnail-link"
+                        href="{{getImage this 'product_size' (cdn ../theme_settings.default_image_product)}}"
+                        data-image-gallery-item
+                        data-image-gallery-new-image-url="{{getImage this 'product_size' (cdn ../theme_settings.default_image_product)}}"
+                        data-image-gallery-zoom-image-url="{{getImage this 'zoom_size' (cdn ../theme_settings.default_image_product)}}">
+                        <img class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage this 'productview_thumb_size' (cdn ../theme_settings.default_image_product)}}" alt="{{this.alt}}" title="{{this.alt}}">
+                    </a>
+                </li>
+            {{/each}}
+        </ul>
+    </section>
+
+
+    <section class="productView-mobile-images" >
+        <div class="image-viewer">
+            <img src="{{cdn 'img/expand-icon.png'}}" class="fa-expand pdp-mobile-zoomCtrl" aria-hidden="true" />
+            <div id="pdp-mobile-flexslider" class="pdp-mobile-flexslider">
+            {{#each product.images}}
+                <div class="feature-row" data-thumb="{{getImage this 'product_size' (cdn ../theme_settings.default_image_product)}}">
+                    <img
+                        class="lazyload feature-row__image"
+                        data-sizes="auto" 
+                        src="{{getImage this 'product_size' (cdn ../theme_settings.default_image_product)}}"
+                        data-orig="{{getImage this 'product_size' (cdn ../theme_settings.default_image_product)}}"
+                        tabindex="-1"
+                        alt="{{name}}" title="{{name}}"
+                    >
+                </div>
+            {{/each}}
+            </div>
+        </div>
+        <div class="mobile-zoom-container hidden">
+            <img src="{{cdn 'img/compress-icon.png'}}" class="fa fa-compress pdp-mobile-zoomCtrl" aria-hidden="true" />
+            <img
+            class="mobile-zoomviewer-image"
+            tabindex="-1"
+            />
+        </div>
+    </section>
+
     <section class="productView-details">
         <div class="productView-product">
             <h1 class="productView-title" {{#if schema}}itemprop="name"{{/if}}>{{product.title}}</h1>
@@ -52,8 +127,8 @@
                 {{#if settings.show_product_reviews}}
                     <span class="productView-reviewLink">
                         <a href="{{product.url}}{{#if is_ajax}}#write_review{{/if}}"
-                           {{#unless is_ajax }}data-reveal-id="modal-review-form"{{/unless}}>
-                           {{lang 'products.reviews.new'}}
+                            {{#unless is_ajax }}data-reveal-id="modal-review-form"{{/unless}}>
+                            {{lang 'products.reviews.new'}}
                         </a>
                     </span>
                     {{> components/products/modals/writeReview}}
@@ -147,54 +222,6 @@
                 {{/if}}
             </dl>
         </div>
-    </section>
-
-    <section class="productView-images" data-image-gallery>
-        <figure class="productView-image"
-                data-image-gallery-main
-                {{#if product.main_image}}
-                data-zoom-image="{{getImage product.main_image 'zoom_size' (cdn theme_settings.default_image_product)}}"
-                {{/if}}
-                >
-            <div class="productView-img-container">
-                {{!-- Remove the surrounding a-element if there is no main image. --}}
-                {{#if product.main_image}}
-                    <a href="{{getImage product.main_image 'zoom_size' (cdn theme_settings.default_image_product)}}">
-                {{/if}}
-
-                <img class="productView-image--default lazyload"
-                     data-sizes="auto"
-                     src="{{cdn 'img/loading.svg'}}"
-                     data-src="{{getImage product.main_image 'product_size' (cdn theme_settings.default_image_product)}}"
-                     alt="{{product.main_image.alt}}" title="{{product.main_image.alt}}" data-main-image>
-
-                {{#if product.main_image}}
-                    </a>
-                {{/if}}
-            </div>
-        </figure>
-        <ul class="productView-thumbnails"{{#gt product.images.length 5}} data-slick='{
-                "infinite": false,
-                "mobileFirst": true,
-                "slidesToShow": 5,
-                "slidesToScroll": 1
-            }'{{/gt}}>
-            {{#each product.images}}
-                <li class="productView-thumbnail">
-                    <a
-                        class="productView-thumbnail-link"
-                        href="{{getImage this 'product_size' (cdn ../theme_settings.default_image_product)}}"
-                        data-image-gallery-item
-                        data-image-gallery-new-image-url="{{getImage this 'product_size' (cdn ../theme_settings.default_image_product)}}"
-                        data-image-gallery-zoom-image-url="{{getImage this 'zoom_size' (cdn ../theme_settings.default_image_product)}}">
-                        <img class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage this 'productview_thumb_size' (cdn ../theme_settings.default_image_product)}}" alt="{{this.alt}}" title="{{this.alt}}">
-                    </a>
-                </li>
-            {{/each}}
-        </ul>
-    </section>
-
-    <section class="productView-details">
         <div class="productView-options">
             {{#if product.release_date }}
                 <p>{{product.release_date}}</p>

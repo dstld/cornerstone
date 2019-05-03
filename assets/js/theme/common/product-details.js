@@ -2,6 +2,8 @@ import utils from '@bigcommerce/stencil-utils';
 import 'foundation-sites/js/foundation/foundation';
 import 'foundation-sites/js/foundation/foundation.reveal';
 import ImageGallery from '../product/image-gallery';
+import MobileImageSlick from '../product/mobile-image-carousel';
+
 import modalFactory, { showAlertModal } from '../global/modal';
 import _ from 'lodash';
 import Wishlist from '../wishlist';
@@ -13,6 +15,8 @@ export default class ProductDetails {
         this.context = context;
         this.imageGallery = new ImageGallery($('[data-image-gallery]', this.$scope));
         this.imageGallery.init();
+        this.mobileImageSlick = new MobileImageSlick();
+        this.mobileImageSlick.init();
         this.listenQuantityChange();
         this.initRadioAttributes();
         Wishlist.load(this.context);

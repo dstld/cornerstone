@@ -2,11 +2,6 @@
     <li class="tab is-active">
         <a class="tab-title" href="#tab-description">{{lang 'products.description'}}</a>
     </li>
-    {{#if product.warranty}}
-        <li class="tab">
-            <a class="tab-title" href="#tab-warranty">{{lang 'products.warranty'}}</a>
-        </li>
-    {{/if}}
     {{#all product.custom_fields theme_settings.show_custom_fields_tabs}}
         <li class="tab">
             <a class="tab-title" href="#tab-{{dashcase (lowercase (sanitize theme_settings.pdp-custom-fields-tab-label))}}">{{sanitize theme_settings.pdp-custom-fields-tab-label}}</a>

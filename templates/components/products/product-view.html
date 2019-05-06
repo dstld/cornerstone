@@ -135,11 +135,7 @@
     </section>
 
     <article class="productView-description"{{#if schema}} itemprop="description"{{/if}}>
-        {{#if theme_settings.show_product_details_tabs}}
-            {{> components/products/description-tabs}}
-        {{else}}
-            {{> components/products/description}}
-        {{/if}}
+        {{> components/products/description-tabs}}
     </article>
 </div>
 

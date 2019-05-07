@@ -211,7 +211,21 @@
         font-size: inherit;
     }
     .price {
+        font-size: fontSize("small");
+    }
+    .price-section {
         font-size: fontSize("smaller");
+
+        &.non-sale-price--withoutTax {
+            font-size: 14px;
+            font-weight: 300;
+            text-transform: capitalize;
+            
+            .price--non-sale {
+                text-decoration: none !important;
+                font-size: 14px;
+            }
+        }
     }
 }
 
@@ -367,6 +381,7 @@
             input[type="radio"] + label {
                 margin-left: 0rem;
                 margin-right: 0.5rem;
+                margin-bottom: 0.25rem;
             }
             .form-option span {
                 display: inline-flex;

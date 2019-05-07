@@ -13,7 +13,7 @@ export default class ProductDetails {
         this.$overlay = $('[data-cart-item-add] .loadingOverlay');
         this.$scope = $scope;
         this.context = context;
-        this.imageGallery = new ImageGallery($('[data-image-gallery]', this.$scope));
+        this.imageGallery = new ImageGallery();
         this.imageGallery.init();
         this.mobileImageSlick = new MobileImageSlick();
         this.mobileImageSlick.init();
@@ -269,27 +269,6 @@ export default class ProductDetails {
             this.updateProductAttributes(productAttributesData);
             this.updateView(productAttributesData, productAttributesContent);
         });
-    }
-
-    showProductImage(image) {
-        if (_.isPlainObject(image)) {
-            const zoomImageUrl = utils.tools.image.getSrc(
-                image.data,
-                this.context.themeSettings.zoom_size,
-            );
-
-            const mainImageUrl = utils.tools.image.getSrc(
-                image.data,
-                this.context.themeSettings.product_size,
-            );
-
-            this.imageGallery.setAlternateImage({
-                mainImageUrl,
-                zoomImageUrl,
-            });
-        } else {
-            this.imageGallery.restoreImage();
-        }
     }
 
     /**
@@ -618,8 +597,6 @@ export default class ProductDetails {
         const behavior = data.out_of_stock_behavior;
         const inStockIds = data.in_stock_attributes;
         const outOfStockMessage = ` (${data.out_of_stock_message})`;
-
-        this.showProductImage(data.image);
 
         if (behavior !== 'hide_option' && behavior !== 'label_option') {
             return;

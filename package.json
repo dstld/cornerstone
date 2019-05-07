@@ -10,6 +10,7 @@
     "@bigcommerce/stencil-utils": "^4.1.0",
     "creditcards": "^3.0.1",
     "easyzoom": "^2.5.0",
+    "flexslider": "^2.7.2",
     "foundation-sites": "^5.5.3",
     "jquery": "^3.3.1",
     "jquery-lazyload": "^1.9.7",

@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import 'easyzoom';
 import 'slick-carousel';
-import 'jquery.panzoom';
 import 'jquery-lazyload';
 
 export default class MobileImageSlick {

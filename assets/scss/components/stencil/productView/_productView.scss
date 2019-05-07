@@ -51,21 +51,6 @@
     }
 }
 
-.productView-img-container {
-    position: relative;
-    margin: auto;
-    max-width: get-width(stencilString('product_size'));
-    width: 100%;
-
-    img {
-        @include lazy-loaded-img;
-        max-height: 100%;
-        width: auto;
-    }
-
-    @include lazy-loaded-padding('product_size');
-}
-
 .productView-thumbnails {
     @include u-listBullets("none");
     @include grid-row($behavior: "nest");
@@ -226,6 +211,10 @@
                 font-size: 14px;
             }
         }
+    }
+    .afterpay-paragraph {
+        text-transform: capitalize;
+        margin: .5rem 0;
     }
 }
 
@@ -585,5 +574,31 @@
 
     @include breakpoint("medium") {
         display: none;
+    }
+}
+
+.flex-direction-nav {
+    a {
+        margin: -80px 0 0 0;
+
+        &:before {
+            font-size: 30px;
+        }
+    }
+    .flex-next {
+        right: 0;
+    }
+    .flex-prev {
+        left: 0;
+    }
+}
+
+.flex-control-thumbs {
+    li {
+        padding: 5px;
+    }
+    img {
+        border: solid 1px #e0e0e0;
+        opacity: 1;
     }
 }

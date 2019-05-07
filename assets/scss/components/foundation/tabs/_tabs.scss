@@ -8,13 +8,15 @@
 //
 // -----------------------------------------------------------------------------
 
+.tabs {
+    border: none !important;
+}
 .tab {
-    border-top: $tab-active-border;
     float: none;
 
     @include breakpoint("medium") {
-        border-top-color: $tab-title-border-color;
         float: left;
+        border: none;
     }
 
     &.is-active {
@@ -26,16 +28,30 @@
         }
 
         @include breakpoint("medium") {
-            border: $tab-active-border;
             border-bottom: $tab-title-border;
         }
+
+        .tab-title {
+            border-bottom: solid 1px #0A0A0A;
+        }
+
     }
 }
 
 .tab-title {
     padding: spacing("half") + spacing("quarter") 0;
     text-align: center;
-    text-decoration: $tab-title-text-decoration;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #0A0A0A!important;
+    padding: 5px 15px;
+    margin-right: 0;
+    font-weight: 700;
+    letter-spacing: .5px;
+    font-size: 10px;
+    line-height: 1.2;
+    outline: none;
 
     @include breakpoint("small") {
         text-align: left;

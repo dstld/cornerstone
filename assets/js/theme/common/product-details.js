@@ -58,6 +58,10 @@ export default class ProductDetails {
         $productOptionsElement.show();
 
         this.previewModal = modalFactory('#previewModal')[0];
+
+        $('.modifier-options').each((index) => {
+            $('.modifier-options > div').eq(index).html($('.modifier-options textarea').eq(index).val());
+        });
     }
 
     /**

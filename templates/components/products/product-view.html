@@ -103,11 +103,12 @@
                 <a href="#">Can't Find Your Size?</a>
             </div>
         </div>
+
+        <article class="productView-description"{{#if schema}} itemprop="description"{{/if}}>
+            {{> components/products/description-tabs}}
+        </article>
     </section>
 
-    <article class="productView-description"{{#if schema}} itemprop="description"{{/if}}>
-        {{> components/products/description-tabs}}
-    </article>
 </div>
 
 <div id="previewModal" class="modal modal--large" data-reveal>

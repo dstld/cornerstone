@@ -15,8 +15,9 @@
         <div class="tab-content__item active">
           {{#each product.custom_fields}}
             {{#if name 'FitguideImage' }}
-              <img class="size-chart"
-                src="{{value}}">
+              <img
+                class="lazy size-chart" data-src="{{value}}"
+              >
             {{/if}}
           {{/each}}
           {{#each product.category }}

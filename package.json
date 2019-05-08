@@ -13,6 +13,7 @@
     "flexslider": "^2.7.2",
     "foundation-sites": "^5.5.3",
     "jquery": "^3.4.1",
+    "jquery-lazy": "^1.7.10",
     "jquery-lazyload": "^1.9.7",
     "jquery-tabs": "^0.5.3",
     "jquery.panzoom": "^3.2.2",

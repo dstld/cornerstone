@@ -7,6 +7,7 @@ import MobileImageSlick from '../product/mobile-image-carousel';
 import modalFactory, { showAlertModal } from '../global/modal';
 import _ from 'lodash';
 import Wishlist from '../wishlist';
+import 'jquery-lazy';
 
 export default class ProductDetails {
     constructor($scope, context, productAttributesData = {}) {
@@ -63,6 +64,7 @@ export default class ProductDetails {
             $('.modifier-options > div').eq(index).html($('.modifier-options textarea').eq(index).val());
         });
 
+        $('.size-chart.lazy').Lazy();
 
         // eslint-disable-next-line func-names
         $('#fitguideModal .nav-tabs a').on('click', function () {

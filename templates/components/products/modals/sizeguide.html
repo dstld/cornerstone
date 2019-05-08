@@ -1,0 +1,29 @@
+<div id="sizeguideModal" class="modal modal--large pdp-modal" data-reveal>
+    <a href="#" class="modal-close" aria-label="{{lang 'common.close'}}" role="button">
+        <span aria-hidden="true">&#215;</span>
+    </a>
+    <div class="modal-content">
+        <div class="fit-guide size-guide">
+            <h2 class="pdp-content__name mt-0">Waitlist</h2>
+            <h3>{{ product.title }}</h3>
+            <div class="mt-3 mb-3">Tell us your size and we'll notify you when this product becomes available.</div>
+            {{#each product.options}}
+                {{{dynamicComponent 'components/products/options'}}}
+            {{/each}}
+            <div>
+                <div class="optionSelector">Comments</div>
+                <textarea class="form-control" rows="3"></textarea>
+                <div class="optionSelector">Enter Your Email</div>
+                <input type="email" name="email" id="email" placeholder="Email" class="form-control"
+                    required="required">
+                <input type="hidden" value="product.sku" autocomplete="off">
+                <span class="hidden">A valid email address is required</span>
+            </div>
+            <div class="mt-4 mb-2 font-weight-normal">Select a size and enter your email above.</div>
+            <div class="text-right">
+                <span class="alert-btn disabled">Alert Me!</span>
+            </div>
+        </div>
+    </div>
+    <div class="loadingOverlay"></div>
+</div>

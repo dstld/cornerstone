@@ -605,4 +605,183 @@
 
 .pdp-fitguide-modelbox {
     text-align: left;
+    margin-bottom: 5px;
+
+    .size_finder {
+      text-decoration: underline;
+      width: 100%;
+      display: block;
+      margin-left: 0;
+      padding-left: 0;
+      padding-top: 8px;
+    }
+}
+.pdp-modal {
+    display: none;
+    position: fixed;
+    height: 100vh;
+    max-height: unset;
+    overflow: auto;
+    top: 50% !important;
+    padding: 20px;
+    z-index: 1050;
+    width: 100%;
+    background: #fff;
+    max-width: 100%;
+
+    &.open {
+        display: block;
+    }
+
+    .modal__close {
+        padding: 20px;
+        outline: none;
+        position: absolute;
+        z-index: 1001;
+    }
+
+    .fit-guide {
+        .pdp-content__name {
+            font-size: 18px;
+            line-height: 1.2;
+            letter-spacing: 0;
+            text-transform: uppercase;
+            text-transform: capitalize;
+            font-weight: 500;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        h4 {
+            font-size: 14px;
+            line-height: 1.2;
+            letter-spacing: .5px;
+            color: #0A0A0A;
+            font-weight: 700;
+            margin: 20px 0 10px;
+        }
+
+        .nav-tabs {
+            margin-top: 0;
+            border-bottom: none;
+            margin-bottom: 10px;
+            background: #efefef;
+            margin-left: 0;
+
+            li {
+                display: table-cell;
+                width: 1%;
+                float: none;
+                position: relative;
+                text-align: center;
+
+                a {
+                    font-weight: 700;
+                    letter-spacing: .5px;
+                    font-size: 11px;
+
+                    &.active {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+        .tab-section-content {
+            margin-bottom: 30px;
+
+            &>.tab-content__item {
+                display: none;
+
+                &.active {
+                    display: block;
+                }
+            }
+
+            img.size-chart {
+                margin-top: 15px;
+                width: 100%;
+            }
+
+            .international-size-chart-wrapper {
+                width: 100%;
+                overflow-x: hidden;
+                overflow-y: hidden;
+                margin-bottom: 30px;
+
+                &.womens-chart {
+                    overflow-x: scroll;
+                }
+            }
+
+            .international-size-chart {
+                width: 100%;
+                overflow: hidden;
+                margin: 0;
+                background: transparent;
+
+                & * {
+                    background: transparent;
+                }
+
+                th,
+                td {
+                    position: relative;
+                    padding: 5px 0;
+                    width: auto;
+                    border: 0;
+                    font-size: 10px;
+                }
+
+                th:first-of-type {
+                    font-weight: 700;
+                    padding-right: 5px;
+                    text-transform: capitalize;
+                }
+
+                tr td:first-of-type {
+                    font-weight: 700;
+                    padding-right: 5px;
+                    text-transform: capitalize;
+                    font-weight: 700;
+                    padding-right: 5px;
+                    text-transform: capitalize;
+                    width: 120px;
+                }
+            }
+
+            .womens-size-conversion {
+                margin-top: 20px;
+
+                .international-size-chart {
+                    width: 100%;
+
+                    tr {
+                        border-top: solid 1px black;
+                    }
+
+                    tr td:first-of-type,
+                    th:first-of-type {
+                        font-size: 10px;
+                        letter-spacing: -1px;
+                        text-transform: uppercase;
+                        width: 100px;
+                        text-align: left;
+                    }
+
+                    th,
+                    td {
+                        font-size: 10px;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+
+        .try-multiple-sizes-description {
+            padding-bottom: 10px;
+            padding-top: 0;
+        }
+    }
+    
 }

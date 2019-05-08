@@ -46,6 +46,8 @@
     text-align: center;
     text-decoration: none;
     z-index: zIndex("high");
+    top: 10px !important;
+    right: 10px !important;
 
     @include breakpoint("medium") {
         font-size: 32px;

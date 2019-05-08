@@ -84,7 +84,7 @@
                     {{/each}}
                 </div>
                 <div class="pdp-fitguide-modelbox">
-                    <a class="size_finder" href="#">Fit Guide</a>
+                    <a class="size_finder" data-reveal-id="fitguideModal" >Fit Guide</a>
                     <div class="modelbox" >Model is 6'2" wearing 32W x 32L</div>
                 </div>
                 {{#if product.can_purchase}}
@@ -111,10 +111,4 @@
 
 </div>
 
-<div id="previewModal" class="modal modal--large" data-reveal>
-    <a href="#" class="modal-close" aria-label="{{lang 'common.close'}}" role="button">
-        <span aria-hidden="true">&#215;</span>
-    </a>
-    <div class="modal-content"></div>
-    <div class="loadingOverlay"></div>
-</div>
+{{> components/products/modals/fitguide product=product }}

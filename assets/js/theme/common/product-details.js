@@ -62,6 +62,16 @@ export default class ProductDetails {
         $('.modifier-options').each((index) => {
             $('.modifier-options > div').eq(index).html($('.modifier-options textarea').eq(index).val());
         });
+
+
+        // eslint-disable-next-line func-names
+        $('#fitguideModal .nav-tabs a').on('click', function () {
+            const index = $(this).data('id');
+            $('#fitguideModal .nav-tabs a').removeClass('active');
+            $(this).addClass('active');
+            $('.tab-section-content .tab-content__item').removeClass('active');
+            $('.tab-section-content .tab-content__item').eq(index).addClass('active');
+        });
     }
 
     /**

@@ -744,14 +744,24 @@ export default class ProductDetails {
             recentProductsContent += `<div class="feature-row" ><a href="${recentlyProducts[i].url}" ><img class="feature-row__image" src="${recentlyProducts[i].images}"  tabindex="-1" /></a></div>`;
         }
         $('.recent-products-slick').html(recentProductsContent);
-        if (recentlyProducts.length > 0) $('.recent-products .section-header').removeClass('hidden');
+        if (recentlyProducts.length > 0) $('.recent-products').removeClass('hidden');
         $('.recent-products-slick').slick({
             infinite: true,
             dots: false,
             centerMode: true,
             centerPadding: '40px',
-            slidesToShow: 1,
+            slidesToShow: 3,
+            slidesToScroll: 1,
             speed: 500,
+            responsive: [
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    },
+                },
+            ],
         });
 
         const productId = $('#product_id').val();

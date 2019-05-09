@@ -737,11 +737,20 @@ export default class ProductDetails {
     }
 
     renderRecentProducts() {
+        const productId = $('#product_id').val();
+        const productImage = $('#product_image').val();
+        const productUrl = $('#product_url').val();
+        const productTitle = $('#product_title').val();
         let recentlyProducts = JSON.parse(window.localStorage.getItem('recentlyViewedProducts'));
-        if (recentlyProducts == null) recentlyProducts = [];
+        if (recentlyProducts == null) {
+            recentlyProducts = [];
+        } else {
+            recentlyProducts = recentlyProducts.filter(item => item.id !== productId);
+        }
         let recentProductsContent = '';
+
         for (let i = 0; i < recentlyProducts.length; i++) {
-            recentProductsContent += `<div class="feature-row" ><a href="${recentlyProducts[i].url}" ><img class="feature-row__image" src="${recentlyProducts[i].images}"  tabindex="-1" /></a></div>`;
+            recentProductsContent += `<div class="feature-row" ><a href="${recentlyProducts[i].url}" ><img class="feature-row__image" src="${recentlyProducts[i].images}"  tabindex="-1" /><span class="slick-figoverlay" >${recentlyProducts[i].title}</span></a></div>`;
         }
         $('.recent-products-slick').html(recentProductsContent);
         if (recentlyProducts.length > 0) $('.recent-products').removeClass('hidden');
@@ -763,16 +772,11 @@ export default class ProductDetails {
                 },
             ],
         });
-
-        const productId = $('#product_id').val();
-        const productImage = $('#product_image').val();
-        const productUrl = $('#product_url').val();
-
-        recentlyProducts = recentlyProducts.filter(item => item.id !== productId);
         recentlyProducts.push({
             id: productId,
             images: productImage,
             url: productUrl,
+            title: productTitle,
         });
         if (recentlyProducts.length > 6) recentlyProducts.shift();
         window.localStorage.setItem('recentlyViewedProducts', JSON.stringify(recentlyProducts));

@@ -20,17 +20,14 @@ export default class MobileImageSlick {
     }
 
     setMainImage() {
-        $('.mobile-zoom-container .mobile-zoomviewer-image').load(() => {
-     
-        }).attr('src', this.$mainImage);
+        $('.mobile-zoom-container .mobile-zoomviewer-image').attr('src', this.$mainImage);
     }
 
-    ImageLoaded() {
+    imageLoaded() {
         this._IMAGE_WIDTH = $('.mobile-zoomviewer-image').width();
         this._IMAGE_HEIGHT = $('.mobile-zoomviewer-image').height();
         this._IMAGE_LOADED = 1;
         const img_left_new = (window.innerWidth - this._IMAGE_WIDTH) / 2;
-        console.log('---  image width:', window.innerWidth, this._IMAGE_WIDTH, img_left_new);
         $('.mobile-zoomviewer-image').css({ top: 0, left: `${img_left_new}px` });
     }
 
@@ -53,10 +50,10 @@ export default class MobileImageSlick {
             this._IMAGE_LOADED = 0;
 
             if ($('.mobile-zoomviewer-image').get(0).complete) {
-                this.ImageLoaded();
+                this.imageLoaded();
             } else {
                 $('.mobile-zoomviewer-image').on('load', () => {
-                    this.ImageLoaded();
+                    this.imageLoaded();
                 });
             }
         });

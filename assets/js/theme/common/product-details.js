@@ -64,7 +64,7 @@ export default class ProductDetails {
             $('.modifier-options > div').eq(index).html($('.modifier-options textarea').eq(index).val());
         });
 
-        $('.size-chart.lazy').Lazy();
+        $('.size-chart.lazy').lazy();
 
         // eslint-disable-next-line func-names
         $('#fitguideModal .nav-tabs a').on('click', function () {

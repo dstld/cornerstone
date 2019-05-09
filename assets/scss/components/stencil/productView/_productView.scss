@@ -788,3 +788,24 @@
     }
     
 }
+
+.recent-products {
+    width: 100vw;
+    max-width: unset;
+    
+    .section-header {
+      margin-bottom: 10px;
+      margin-top: 20px;
+      padding: 0 10px;
+    }
+  
+  
+    .feature-row {
+      padding: 0 10px;
+  
+      img {
+        box-shadow: rgba(0, 0, 0, 0.2) 1px 0 10px 1px;
+      }
+    }
+  }
+  

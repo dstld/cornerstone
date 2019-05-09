@@ -8,7 +8,9 @@
         {{/if}}
     {{/each}}
 
-    
+    <input type="hidden" id="product_id" value="{{product.id}}" />
+    <input type="hidden" id="product_image" value="{{getImage product.main_image 'product_size' (cdn ../theme_settings.default_image_product)}}" />
+    <input type="hidden" id="product_url" value="{{product.url}}" />
 
     <section class="productView-images" data-image-gallery>
         <div class="flexslider">
@@ -53,10 +55,10 @@
 
     <section class="productView-details">
         <div class="productView-product">
-            <h1 class="productView-title" {{#if schema}}itemprop="name"{{/if}}>{{product.title}}</h1>
+            <h1 class="productView-title">{{product.title}}</h1>
             {{#if product.brand}}
                 <h2 class="productView-brand"{{#if schema}} itemprop="brand" itemscope itemtype="http://schema.org/Brand"{{/if}}>
-                    <a href="{{product.brand.url}}"{{#if schema}} itemprop="url"{{/if}}><span{{#if schema}} itemprop="name"{{/if}}>{{product.brand.name}}</span></a>
+                    <a href="{{product.brand.url}}"></a><span {{#if schema}} itemprop="name" {{/if}} >{{product.brand.name}}</span></a>
                 </h2>
             {{/if}}
             {{#if product.call_for_price}}
@@ -109,6 +111,12 @@
         </article>
     </section>
 
+</div>
+
+<div class="recent-products">
+    <h4 class="section-header text-uppercase" >Recent Products</h4>
+    <div class="recent-products-slick">
+    </div>
 </div>
 
 {{> components/products/modals/fitguide product=product }}

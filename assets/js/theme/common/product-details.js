@@ -8,6 +8,7 @@ import modalFactory, { showAlertModal } from '../global/modal';
 import _ from 'lodash';
 import Wishlist from '../wishlist';
 import 'jquery-lazy';
+import 'slick-carousel';
 
 export default class ProductDetails {
     constructor($scope, context, productAttributesData = {}) {
@@ -74,6 +75,8 @@ export default class ProductDetails {
             $('.tab-section-content .tab-content__item').removeClass('active');
             $('.tab-section-content .tab-content__item').eq(index).addClass('active');
         });
+
+        this.renderRecentProducts();
     }
 
     /**
@@ -731,5 +734,37 @@ export default class ProductDetails {
                     .removeClass('is-active');
             }
         }
+    }
+
+    renderRecentProducts() {
+        let recentlyProducts = JSON.parse(window.localStorage.getItem('recentlyViewedProducts'));
+        if (recentlyProducts == null) recentlyProducts = [];
+        let recentProductsContent = '';
+        for (let i = 0; i < recentlyProducts.length; i++) {
+            recentProductsContent += `<div class="feature-row" ><a href="${recentlyProducts[i].url}" ><img class="feature-row__image" src="${recentlyProducts[i].images}"  tabindex="-1" /></a></div>`;
+        }
+        $('.recent-products-slick').html(recentProductsContent);
+        if (recentlyProducts.length > 0) $('.recent-products .section-header').removeClass('hidden');
+        $('.recent-products-slick').slick({
+            infinite: true,
+            dots: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 1,
+            speed: 500,
+        });
+
+        const productId = $('#product_id').val();
+        const productImage = $('#product_image').val();
+        const productUrl = $('#product_url').val();
+
+        recentlyProducts = recentlyProducts.filter(item => item.id !== productId);
+        recentlyProducts.push({
+            id: productId,
+            images: productImage,
+            url: productUrl,
+        });
+        if (recentlyProducts.length > 6) recentlyProducts.shift();
+        window.localStorage.setItem('recentlyViewedProducts', JSON.stringify(recentlyProducts));
     }
 }

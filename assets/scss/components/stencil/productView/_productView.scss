@@ -17,6 +17,9 @@
     }
 }
 
+.hidden {
+    display: none;
+}
 
 // Images
 // -----------------------------------------------------------------------------
@@ -625,6 +628,12 @@
     background: stencilColor("color-white");
     max-width: 100%;
 
+    @include breakpoint("medium") {
+        width: auto;
+        height: auto;
+        max-height: 90vh;
+    }
+
     &.open {
         display: block;
     }
@@ -658,6 +667,17 @@
             color: stencilColor("navUser-color");
             font-weight: fontWeight("bold");
             margin: stencilNumber("padding-small") * 2 0;
+        }
+
+        h2 {
+            margin-top: 10px;
+        }
+
+        h3 {
+            font-weight: fontWeight("thin");
+            font-size: fontSize("base") * 1.4;
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
 
         .nav-tabs {
@@ -760,7 +780,7 @@
 
                     tr td:first-of-type,
                     th:first-of-type {
-                        font-size: 10px;
+                        font-size: fontSize("base") * .8;
                         letter-spacing: -1px;
                         text-transform: uppercase;
                         width: remCalc(100px);
@@ -769,7 +789,7 @@
 
                     th,
                     td {
-                        font-size: 10px;
+                        font-size: fontSize("base") * .8;
                         text-align: center;
                     }
                 }
@@ -780,6 +800,34 @@
             padding-bottom: stencilNumber("padding-small");
             padding-top: 0;
             font-weight: fontWeight("thin");
+        }
+
+        .form-control {
+            background: transparent;
+            margin: 5px 0 20px;
+        }
+        .alert-btn {
+            text-align: center;
+            padding: stencilNumber("padding-normal");
+            cursor: pointer;
+            font-size: fontSize("base") * .8;
+            font-weight: fontWeight("bold");
+            text-transform: uppercase;
+            transition: .2s;
+            border-radius: 0;
+            white-space: normal;
+            background-color: stencilColor("navUser-color");
+            color: stencilColor("color-white");
+            border: 2px solid stencilColor("navUser-color");
+            width: 50%;
+            display: inline-block;
+            cursor: pointer;
+            opacity: .65;
+            margin: stencilNumber("padding-small") 0;
+
+            &[disabled] {
+                opacity: .25;
+            }
         }
     }
     

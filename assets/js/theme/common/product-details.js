@@ -25,6 +25,7 @@ export default class ProductDetails {
         this.getTabRequests();
 
         const $form = $('form[data-cart-item-add]', $scope);
+        this.listPurchasableSkus();
         const $productOptionsElement = $('[data-product-option-change]', $form);
         const hasOptions = $productOptionsElement.html().trim().length;
         const hasDefaultOptions = $productOptionsElement.find('[data-default]').length;
@@ -98,10 +99,34 @@ export default class ProductDetails {
         return formData;
     }
 
+    getDefaultVariantOptions() {
+        const productSku = $('#product_sku').val();
+        const arr = productSku.split('_'); // "['SKU', 'pId', 'option1', 'option2' ....]"
+        return arr.slice(2, -1);
+    }
+
+    listPurchasableSkus() {
+        // const defaultOptions = this.getDefaultVariantOptions();
+        const productOptionsArr = $('[data-product-option-change] [data-product-attribute="set-rectangle"]').length;
+        const options = [];
+        for (let index = 0; index < productOptionsArr; index++) {
+            $.each($('[data-product-option-change] [data-product-attribute="set-rectangle"]').eq(index).find('.form-option'), (id, value) => {
+                const optionVal = $(value).data('product-attribute-value');
+                const optionData = $(value).data('attr-label');
+                if (options[index] === undefined) {
+                    options[index] = [];
+                }
+                options[index].push({
+                    value: optionVal,
+                    data: optionData,
+                });
+            });
+        }
+    }
+
     setProductVariant() {
         const unsatisfiedRequiredFields = [];
         const options = [];
-
         $.each($('[data-product-attribute]'), (index, value) => {
             const optionLabel = value.children[0].innerText;
             const optionTitle = optionLabel.split(':')[0].trim();
@@ -542,7 +567,6 @@ export default class ProductDetails {
      */
     updateView(data, content = null) {
         const viewModel = this.getViewModel(this.$scope);
-
         this.showMessageBox(data.stock_message || data.purchasing_message);
 
         if (_.isObject(data.price)) {

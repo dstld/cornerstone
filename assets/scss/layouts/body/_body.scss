@@ -23,9 +23,10 @@
 
 
 .page {
+    @include grid-row(
+        $behavior: nest
+    );
     margin: 0;
-    max-width: none;
-    width: auto;
 }
 
 .page-content,

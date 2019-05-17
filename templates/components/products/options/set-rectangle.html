@@ -1,4 +1,4 @@
-<div class="form-field" data-product-attribute="set-rectangle">
+<div class="form-field" data-product-attribute="set-rectangle" data-sku="{{id}}">
     <label class="form-label form-label--alternate form-label--inlineSmall">
         {{this.display_name}}:
         <span data-option-value></span>
@@ -10,6 +10,7 @@
             type="radio"
             id="attribute_rectangle__{{../id}}_{{id}}"
             name="attribute[{{../id}}]"
+            data-sku="{{../id}}"
             value="{{id}}"
             {{#if selected}}
                 checked

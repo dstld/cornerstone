@@ -78,6 +78,33 @@ export default class ProductDetails {
         });
 
         this.renderRecentProducts();
+        utils.api.search.search('"Mens Slim Jeans"', { template: 'search/quick-product-details', section: 'product' }, (err, response) => {
+            if (err) {
+                return false;
+            }
+
+            const ele = $('<div></div>');
+            ele.html(response);
+            const colorSwatches = [];
+            $('.productInfo-id', ele).each((index, item) => {
+                colorSwatches.push($(item).html());
+            });
+            const swatchPatterns = [];
+            colorSwatches.forEach((productId) => {
+                utils.api.product.getById(productId, { template: 'products/product-info' }, (e, res) => {
+                    if (e) {
+                        return false;
+                    }
+                    const ele2 = $('<div></div>');
+                    ele2.html(res);
+                    swatchPatterns.push({
+                        id: productId,
+                        pattern: $('.pattern-image', ele2).eq(1).html(),
+                    });
+                });
+            });
+            console.log('---------- swatchPatterns', swatchPatterns);
+        });
     }
 
     /**

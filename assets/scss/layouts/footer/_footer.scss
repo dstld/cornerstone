@@ -63,8 +63,10 @@ footer {
         text-align: left;
         margin-bottom: 20px;
 
-        & div {
-            padding: 0;
+        @include breakpoint("medium") {
+            & div {
+                padding: 0;
+            }
         }
 
         .privacy-notice {
@@ -117,6 +119,11 @@ footer {
 
         #gender-choice-footer {
             margin-bottom: 20px;
+            padding-left: 5px;
+
+            @include breakpoint("medium") {
+                padding-left: 0;
+            }
 
             .gender-col {
                 padding: 0;
@@ -134,9 +141,14 @@ footer {
             }
         }
         .signup-col {
-            padding: 0;
             position: relative;
             margin-bottom: 30px;
+            margin-top: 20px;
+
+            @include breakpoint("medium") {
+                margin-top: 0;
+                padding: 0;
+            }
             
             #signup-footer {
                 background-color: #ccc!important;
@@ -145,6 +157,12 @@ footer {
                 padding: 15px;
                 color: white;
                 text-transform: uppercase;
+                padding-top: 20px;
+
+                @include breakpoint("medium") {
+                    padding-top: 15px;
+                }
+                
                 &[disabled] {
                     opacity: .65;
                 }

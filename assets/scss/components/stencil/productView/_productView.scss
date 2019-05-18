@@ -384,6 +384,40 @@
                 color: stencilColor('color-white');
             }
         }
+        
+        .form-field[data-product-attribute="swatch"] {
+            display: block;
+            text-align: left;
+            margin-bottom: stencilNumber("padding-small");
+
+            .form-label--alternate {
+                display: none;
+            }
+            .form-option-swatch {
+                margin-left: 0;
+
+                .form-option-expandeds {
+                    display: inline;
+                    font-size: 10px;
+                    position: absolute;
+                    top: -15px;
+                    left: 50%;
+                    transform: translate(-50%, 0);
+                    transition: all .3s linear;
+                    opacity: 0;
+                    font-weight: fontWeight("bold");
+                    text-transform: uppercase;
+                }
+
+                &:hover {
+                    .form-option-expandeds {
+                        opacity: 1;
+                        transition: all .3s linear;
+                    }
+                }
+            }
+            
+        }
     }
 
     .form-action {
@@ -579,6 +613,7 @@
 .flex-direction-nav {
     a {
         margin: remCalc(-80px) 0 0 0;
+        top: calc(50% - 20px);
 
         &:before {
             font-size: remCalc(30px);
@@ -831,6 +866,38 @@
         }
     }
     
+    .size-guide {
+        .sizeguide-field {
+            display: block;
+            margin: 10px 3px;
+
+            .form-field {
+                margin: 10px 3px;
+            }
+            .form-option {
+                margin: 0 2px;
+            }
+            .label--alternate {
+                margin-bottom: 2px;
+            }
+            .form-option {
+                background: #fff;
+                .form-option-variant {
+                    color: #000;
+                }
+            }
+            .form-radio:checked + .form-option {
+                background: black;
+                
+                .form-option-variant {
+                    color: white;
+                }
+            }
+        }
+        .user-comments {
+            margin-top: 20px;
+        }
+    }
 }
 
 .recent-products {

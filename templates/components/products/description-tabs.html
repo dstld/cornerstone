@@ -3,7 +3,7 @@
         <a class="tab-title" href="#tab-description">{{lang 'products.description'}}</a>
     </li>
     {{#each product.options }}
-        {{#if type '!==' 'Configurable_PickList_Set' }}
+        {{#if type '===' 'Configurable_Entry_Text_MultiLine' }}
         <li class="tab">
             <a class="tab-title" href="#tab-{{dashcase (lowercase (sanitize display_name))}}">{{display_name}}</a>
         </li>
@@ -20,7 +20,7 @@
         {{{product.description}}}
     </div>
     {{#each product.options }}
-        {{#if type '!==' 'Configurable_PickList_Set' }}
+        {{#if type '===' 'Configurable_Entry_Text_MultiLine' }}
             <div class="tab-content modifier-options" id="tab-{{dashcase (lowercase (sanitize display_name))}}">
                 <textarea hidden >{{prefill}}</textarea>
                 <div></div>

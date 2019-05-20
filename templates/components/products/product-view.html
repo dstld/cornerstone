@@ -18,9 +18,12 @@
         <div class="flexslider">
             <ul class="slides">
                 {{#each product.images}}
-                    <li data-thumb="{{getImage this 'product_size' (cdn ../theme_settings.default_image_product)}}">
+                    <li data-thumb="{{getImage this 'zoom_size'}}">
                         <img 
-                            src="{{getImage this 'product_size' (cdn ../theme_settings.default_image_product)}}"
+                            class="lazyload"
+                            data-sizes="auto"
+                            src="{{cdn 'img/loading.svg'}}" 
+                            data-src="{{getImage this 'zoom_size'}}"
                         >
                     </li>
                 {{/each}}
@@ -33,12 +36,12 @@
             <img src="{{cdn 'img/expand-icon.png'}}" class="fa-expand pdp-mobile-zoomCtrl" aria-hidden="true" />
             <div id="pdp-mobile-flexslider" class="pdp-mobile-flexslider">
             {{#each product.images}}
-                <div class="feature-row" data-thumb="{{getImage this 'product_size' (cdn ../theme_settings.default_image_product)}}">
+                <div class="feature-row" data-thumb="{{getImage this 'zoom_size'}}">
                     <img
                         class="lazyload feature-row__image"
-                        data-sizes="auto" 
-                        src="{{getImage this 'product_size' (cdn ../theme_settings.default_image_product)}}"
-                        data-orig="{{getImage this 'product_size' (cdn ../theme_settings.default_image_product)}}"
+                        data-sizes="auto"
+                        src="{{cdn 'img/loading.svg'}}" 
+                        data-src="{{getImage this 'zoom_size'}}"
                         tabindex="-1"
                         alt="{{name}}" title="{{name}}"
                     >

@@ -214,6 +214,10 @@
     .afterpay-paragraph {
         text-transform: capitalize;
         margin: .5rem 0;
+
+        .afterpay-link {
+            font-size: 12px;
+        }
     }
 }
 
@@ -397,16 +401,21 @@
                 margin-left: 0;
 
                 .form-option-expandeds {
-                    display: inline;
+                    display: inline-block;
                     font-size: 10px;
                     position: absolute;
-                    top: -15px;
+                    top: -21px;
                     left: 50%;
-                    transform: translate(-50%, 0);
+                    -webkit-transform: translate(-50%,0);
+                    transform: translate(-50%,0);
                     transition: all .3s linear;
                     opacity: 0;
+                    width: max-content;
                     font-weight: fontWeight("bold");
-                    text-transform: uppercase;
+                    border-radius: 3px;
+                    text-transform: capitalize;
+                    border: 1px solid lightgray;
+                    padding: 0px 4px;
                 }
 
                 &:hover {

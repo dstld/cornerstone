@@ -103,7 +103,6 @@ export default class ProductDetails {
                     });
                 });
             });
-            console.log('---------- swatchPatterns', swatchPatterns);
         });
     }
 
@@ -813,7 +812,7 @@ export default class ProductDetails {
         const productUrl = $('#product_url').val();
         const productTitle = $('#product_title').val();
         let recentlyProducts = JSON.parse(window.localStorage.getItem('recentlyViewedProducts'));
-        if (recentlyProducts == null) {
+        if (recentlyProducts === null) {
             recentlyProducts = [];
         } else {
             recentlyProducts = recentlyProducts.filter(item => item.id !== productId);

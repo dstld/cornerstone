@@ -89,7 +89,13 @@
                 </div>
                 <div class="pdp-fitguide-modelbox">
                     <a class="size_finder" data-reveal-id="fitguideModal" >Fit Guide</a>
-                    <div class="modelbox" >Model is 6'2" wearing 32W x 32L</div>
+                    <div class="modelbox">
+                        {{#each product.custom_fields}}
+                            {{#if name 'fitguide_title' }}
+                                <span>{{value}}</span>
+                            {{/if}}
+                        {{/each}}
+                    </div>
                 </div>
                 {{#if product.can_purchase}}
                     {{> components/products/add-to-cart}}

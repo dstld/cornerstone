@@ -19,13 +19,15 @@
                 </li>
                 {{#each children}}
                     {{#if (length (split name "_SubCategory")) '===' 2}}
-                        {{#each (split name "_SubCategory") }}
-                            {{#if @first }}
-                                <li class="navPage-childList-item">
-                                    <a class="navPage-childList-action navPages-action" href="{{url}}">{{this}}</a>
-                                </li>
-                            {{/if}}
-                        {{/each}}
+                        <li class="navPage-childList-item">
+                            <a class="navPage-childList-action navPages-action" href="{{url}}">
+                                {{#each (split name "_SubCategory") }}
+                                    {{#if @first }}
+                                        {{this}}
+                                    {{/if}}
+                                {{/each}}
+                            </a>
+                        </li>
                     {{/if}}
                 {{/each}}
             {{/if}}

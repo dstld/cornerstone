@@ -23,10 +23,6 @@ category:
                 <aside class="page-sidebar" id="faceted-search-container">
                     {{> components/category/sidebar}}
                 </aside>
-            {{else if category.subcategories}}
-                <aside class="page-sidebar" id="faceted-search-container">
-                    {{> components/category/sidebar}}
-                </aside>
             {{else if category.shop_by_price}}
                 {{#if theme_settings.shop_by_price_visibility}}
                     <aside class="page-sidebar" id="faceted-search-container">
@@ -39,13 +35,31 @@ category:
                 {{#if category.image}}
                     <img class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage category.image 'zoom_size'}}">
                 {{/if}}
-                <h1 class="page-heading">{{category.name}}</h1>
+                <h1 class="page-heading">
+                    {{#if (length (split category.name "_SubCategory")) '===' 2}}
+                        {{#each (split category.name "_SubCategory") }}
+                            {{#if @first }}
+                                {{this}}
+                            {{/if}}
+                        {{/each}}
+                    {{ else }}
+                        {{category.name}}
+                    {{/if}}
+                </h1>
                 <div style="padding-top: 20px;">
                     {{{category.description}}}
                 </div>
                 {{#each category.subcategories}}
                     <div class="subcategory-list">
-                        <h3 class="title">/&nbsp;{{name}}</h3>
+                        {{#if (length (split name "_SubCategory")) '===' 2}}
+                            {{#each (split name "_SubCategory") }}
+                                {{#if @first }}
+                                    <h3 class="title">/&nbsp;{{this}}</h3>
+                                {{/if}}
+                            {{/each}}
+                        {{ else }}
+                            <h3 class="title">/&nbsp;{{name}}</h3>
+                        {{/if}}
                         {{#if products}}
                             {{> components/category/product-listing}}
                         {{else}}

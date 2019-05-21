@@ -431,12 +431,6 @@
 
     .form-action {
 
-        @include breakpoint("small") {
-            float: left;
-            padding: 0 remCalc(10);
-            width: 50%;
-        }
-
         @include breakpoint("medium") {
             float: none;
             padding: 0;
@@ -542,6 +536,7 @@
 
     &.slick-initialized .feature-row__image {
         display: block;
+        width: 100%;
     }
 
     .slick-dots {

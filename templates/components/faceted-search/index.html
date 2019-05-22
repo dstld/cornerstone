@@ -2,31 +2,9 @@
     {{> components/faceted-search/selected-facets this.selected}}
 
     <a href="#facetedSearch-navList" role="button" class="facetedSearch-toggle toggleLink" data-collapsible>
-        <span class="facetedSearch-toggle-text">
-            {{#if facets.length '>' 2}}
-                {{lang 'search.faceted.browse-by'}} {{ join (pluck facets 'title') ', ' limit=2 }} &amp; {{ toLowerCase (lang 'search.faceted.more') }}
-            {{/if}}
-
-            {{#if facets.length '<=' 2}}
-                {{lang 'search.faceted.browse-by'}} {{ join (pluck facets 'title') ', ' lastSeparator=' & ' }}
-            {{/if}}
-        </span>
-
         <span class="facetedSearch-toggle-indicator">
-            <span class="toggleLink-text toggleLink-text--on">
-                {{lang 'search.faceted.hide-filters'}}
-
-                <i class="icon" aria-hidden="true">
-                    <svg><use xlink:href="#icon-keyboard-arrow-up"/></svg>
-                </i>
-            </span>
-
-            <span class="toggleLink-text toggleLink-text--off">
-                {{lang 'search.faceted.show-filters'}}
-
-                <i class="icon" aria-hidden="true">
-                    <svg><use xlink:href="#icon-keyboard-arrow-down"/></svg>
-                </i>
+            <span class="toggleLink-text">
+                Size Filter +
             </span>
         </span>
     </a>

@@ -17,5 +17,54 @@
 }
 
 .main-container {
-    padding: 0 50px;
+    padding: 0;
+    
+    #faceted-search-container {
+        padding: 0;
+
+        .accordion {
+            padding: 10px 10px 10px 30px;
+
+            .accordion-title {
+                padding: 1rem 0;
+            }
+            .accordion-navigation-actions {
+                right: 0;
+            }
+            .accordion-navigation, dd {
+                border-top: 0;
+            }
+        }
+        .facetedSearch-toggle {
+            text-decoration: none;
+            background: #eee;
+            border: none;
+            padding: .6rem;
+            cursor: pointer;
+
+            .facetedSearch-toggle-indicator {
+                width: auto;
+                float: none;
+                text-align: center;
+            }
+        }
+    }
+
+    #product-listing-container {
+        .category-image {
+            display: none;
+        }
+    }
+
+    @include breakpoint("large") {
+        padding: 0 50px;
+        
+        #product-listing-container {
+            padding: 10px;
+
+            .category-image {
+                display: block;
+            }
+        }
+    }
 }

@@ -33,7 +33,7 @@ category:
 
             <main class="page-content" id="product-listing-container">
                 {{#if category.image}}
-                    <img class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage category.image 'zoom_size'}}">
+                    <img class="lazyload category-image" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage category.image 'zoom_size'}}">
                 {{/if}}
                 <h1 class="page-heading">
                     {{#if (length (split category.name "_SubCategory")) '===' 2}}
@@ -62,8 +62,6 @@ category:
                         {{/if}}
                         {{#if products}}
                             {{> components/category/product-listing}}
-                        {{else}}
-                            <p>{{lang 'categories.no_products'}}</p>
                         {{/if}}
                     </div>
                 {{/each}}

@@ -14,9 +14,9 @@
 
 
 .breadcrumbs {
-    display: none; // 1
-    font-size: 0; // 2
-    text-align: center;
+    padding: stencilNumber("padding-small") * 2 0;
+    border-bottom: solid 1px lightgray;
+    border-top: solid 1px lightgray;
 }
 
 .breadcrumb {

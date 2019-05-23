@@ -15,3 +15,17 @@
         padding: 0 ($container-padding * 4);
     }
 }
+
+.grid-container {
+    margin: 0 40px 32px;
+    
+    .product {
+        .breadcrumbs {
+            display: none;
+
+            @include breakpoint("medium") {
+                display: block;
+            }   
+        }
+    }
+}

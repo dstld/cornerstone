@@ -5,6 +5,9 @@ category:
         limit: {{theme_settings.categorypage_products_per_page}}
 ---
 {{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{inject "categoryList" categories}}
+{{inject "currentCategory" category}}
+
 {{#partial "head"}}
     {{#if pagination.category.previous}}
         <link rel="prev" href="{{pagination.category.previous}}">
@@ -50,20 +53,17 @@ category:
                     {{{category.description}}}
                 </div>
                 {{#each category.subcategories}}
-                    <div class="subcategory-list">
-                        {{#if (length (split name "_SubCategory")) '===' 2}}
-                            {{#each (split name "_SubCategory") }}
-                                {{#if @first }}
-                                    <h3 class="title">/&nbsp;{{this}}</h3>
-                                {{/if}}
-                            {{/each}}
-                        {{ else }}
+                    {{#unless (length (split name "_SubCategory")) '===' 2}}
+                        <div class="subcategory-list subcategory-{{id}} hidden">
                             <h3 class="title">/&nbsp;{{name}}</h3>
-                        {{/if}}
-                        {{#if products}}
-                            {{> components/category/product-listing}}
-                        {{/if}}
-                    </div>
+                            {{#if description }}
+                                <div class="description">{{{description}}}</div>
+                            {{/if}}
+                            {{#if products}}
+                                {{> components/category/product-listing}}
+                            {{/if}}
+                        </div>
+                    {{/unless}}
                 {{/each}}
             </main>
         </div>

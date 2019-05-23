@@ -13,6 +13,7 @@ export default class Category extends CatalogPage {
             this.onSortBySubmit = this.onSortBySubmit.bind(this);
             hooks.on('sortBy-submitted', this.onSortBySubmit);
         }
+        this.hideNoSubCategories();
     }
 
     initFacetedSearch() {
@@ -43,5 +44,28 @@ export default class Category extends CatalogPage {
                 scrollTop: 0,
             }, 100);
         });
+    }
+
+    hideNoSubCategories() {
+        const entireCategories = this.context.categoryList;
+        const currentCategory = this.context.currentCategory;
+        let currentCatObj = {};
+        entireCategories.forEach((mainSub) => {
+            if (parseInt(mainSub.id, 10) === parseInt(currentCategory.id, 10)) {
+                currentCatObj = mainSub;
+            } else {
+                const children = mainSub.children.filter(item => item.id === currentCategory.id);
+                if (children.length > 0) {
+                    currentCatObj = children[0];
+                }
+            }
+        });
+        if (currentCatObj.children) {
+            currentCatObj.children.forEach((subCat) => {
+                if (!subCat.children) {
+                    $(`.subcategory-${subCat.id}`).removeClass('hidden');
+                }
+            });
+        }
     }
 }

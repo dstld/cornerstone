@@ -56,11 +56,18 @@
         }
     }
 
-    @include breakpoint("large") {
+    @include breakpoint("medium") {
         padding: 0 50px;
+        
+        #faceted-search-container {
+            padding-right: 30px;
+            padding-left: 0;
+            width: 300px;
+        }
         
         #product-listing-container {
             padding: 10px;
+            width: calc(100% - 300px);
 
             .category-image {
                 display: block;

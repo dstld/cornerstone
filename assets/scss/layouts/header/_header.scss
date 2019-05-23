@@ -194,9 +194,10 @@
       @include breakpoint("medium") {
         position: absolute;
         width: 600px;
-        top: 69px;
+        top: 59px;
         background: transparent;
         padding: 0 !important;
+        box-shadow: rgba(211, 211, 211, 0.4) 0 2px 4px 2px;
 
         &.one-column {
           width: auto;

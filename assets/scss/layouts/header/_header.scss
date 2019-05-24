@@ -14,7 +14,7 @@
   @include breakpoint("medium") {
     overflow: visible;
     position: fixed;
-    height: spacing("single") * 3.5;
+    height: remCalc(70);
     padding: 0;
 
     &.is-open {
@@ -31,7 +31,7 @@
 
     @include breakpoint("medium") {
       display: block;
-      height: spacing("single") * 3.5;
+      height: remCalc(70);
       position: absolute;
       top: 0;
       left: 0;
@@ -48,7 +48,7 @@
     @include breakpoint("medium") {
       margin: 0;
       padding: 0;
-      height: spacing("single") * 3.5;
+      height: remCalc(70);
 
       .header.fixed & {
         background-color: color("greys", "lightest");
@@ -353,8 +353,8 @@
     }
 
     @include breakpoint("medium") {
-      height: spacing("single") * 3.5;
-      line-height: spacing("single") * 3.5;
+      height: remCalc(70);
+      line-height: remCalc(70);
       top: 0;
       transform: translateY(0);
       position: absolute;

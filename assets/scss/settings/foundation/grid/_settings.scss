@@ -10,14 +10,14 @@
 //
 // -----------------------------------------------------------------------------
 
-$exportCSS--grid:               true; // 1
+$exportCSS--grid:               false !default; // 1
 
 
 // Foundation Variables
 // -----------------------------------------------------------------------------
 
-$include-html-grid-classes:     $include-html-classes;
-$include-xl-html-grid-classes:  false;
+$include-html-grid-classes:     false !default;
+$include-xl-html-grid-classes:  false !default;
 
 $row-width:                     layout("max");
 $total-columns:                 12;

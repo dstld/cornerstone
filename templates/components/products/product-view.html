@@ -8,13 +8,7 @@
         {{/if}}
     {{/each}}
 
-    <input type="hidden" id="product_id" value="{{product.id}}" />
-    <input type="hidden" id="product_image" value="{{getImage product.main_image 'product_size' (cdn ../theme_settings.default_image_product)}}" />
-    <input type="hidden" id="product_url" value="{{product.url}}" />
-    <input type="hidden" id="product_title" value="{{product.title}}" />
-    <input type="hidden" id="product_sku" value="{{product.sku}}" />
-
-    <section class="productView-images" data-image-gallery>
+    <section class="productView-images col-sm-6" data-image-gallery>
         <div class="flexslider">
             <ul class="slides">
                 {{#each product.images}}
@@ -31,7 +25,7 @@
         </div>
     </section>
 
-    <section class="productView-mobile-images" >
+    <section class="productView-mobile-images col-12" >
         <div class="image-viewer">
             <img src="{{cdn 'img/expand-icon.png'}}" class="fa-expand pdp-mobile-zoomCtrl" aria-hidden="true" />
             <div id="pdp-mobile-flexslider" class="pdp-mobile-flexslider">
@@ -58,7 +52,7 @@
         </div>
     </section>
 
-    <section class="productView-details">
+    <section class="productView-details col-12 col-sm-6">
         <div class="productView-product">
             <h1 class="productView-title">{{product.title}}</h1>
             {{#if product.brand}}

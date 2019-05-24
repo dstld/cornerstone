@@ -12,8 +12,6 @@
 
     @include breakpoint("medium") {
         padding-top: spacing("base");
-        max-width: remCalc(1170px) !important;
-        margin: auto !important;
     }
 }
 
@@ -634,6 +632,7 @@
 .flex-control-thumbs {
     li {
         padding: stencilNumber("padding-small") * .5;
+        width: 12.5%;
     }
     img {
         border: solid 1px #e0e0e0;

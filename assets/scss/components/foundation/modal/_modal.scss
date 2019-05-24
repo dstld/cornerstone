@@ -42,10 +42,17 @@
     font-size: 26px;
     line-height: remCalc($reveal-close-height);
     padding: 0;
+    color: #000 !important;
+    cursor: pointer;
+    font-size: 40px !important;
+    font-weight: 300;
+    line-height: 1;
     position: absolute;
     text-align: center;
     text-decoration: none;
     z-index: zIndex("high");
+    top: 10px !important;
+    right: 10px !important;
 
     @include breakpoint("medium") {
         font-size: 32px;

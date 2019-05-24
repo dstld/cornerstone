@@ -2,30 +2,37 @@ import utils from '@bigcommerce/stencil-utils';
 import 'foundation-sites/js/foundation/foundation';
 import 'foundation-sites/js/foundation/foundation.reveal';
 import ImageGallery from '../product/image-gallery';
+import MobileImageSlick from '../product/mobile-image-carousel';
+
 import modalFactory, { showAlertModal } from '../global/modal';
 import _ from 'lodash';
 import Wishlist from '../wishlist';
+import 'jquery-lazy';
+import 'slick-carousel';
 
 export default class ProductDetails {
     constructor($scope, context, productAttributesData = {}) {
         this.$overlay = $('[data-cart-item-add] .loadingOverlay');
         this.$scope = $scope;
         this.context = context;
-        this.imageGallery = new ImageGallery($('[data-image-gallery]', this.$scope));
+        this.imageGallery = new ImageGallery();
         this.imageGallery.init();
+        this.mobileImageSlick = new MobileImageSlick();
+        this.mobileImageSlick.init();
         this.listenQuantityChange();
         this.initRadioAttributes();
         Wishlist.load(this.context);
         this.getTabRequests();
 
         const $form = $('form[data-cart-item-add]', $scope);
+        this.listPurchasableSkus();
         const $productOptionsElement = $('[data-product-option-change]', $form);
         const hasOptions = $productOptionsElement.html().trim().length;
         const hasDefaultOptions = $productOptionsElement.find('[data-default]').length;
 
         $productOptionsElement.on('change', event => {
             this.productOptionsChanged(event);
-            this.setProductVariant();
+            // this.setProductVariant();
         });
 
         $form.on('submit', event => {
@@ -54,6 +61,49 @@ export default class ProductDetails {
         $productOptionsElement.show();
 
         this.previewModal = modalFactory('#previewModal')[0];
+
+        $('.modifier-options').each((index) => {
+            $('.modifier-options > div').eq(index).html($('.modifier-options textarea').eq(index).val());
+        });
+
+        $('.size-chart.lazy').lazy();
+
+        // eslint-disable-next-line func-names
+        $('#fitguideModal .nav-tabs a').on('click', function () {
+            const index = $(this).data('id');
+            $('#fitguideModal .nav-tabs a').removeClass('active');
+            $(this).addClass('active');
+            $('.tab-section-content .tab-content__item').removeClass('active');
+            $('.tab-section-content .tab-content__item').eq(index).addClass('active');
+        });
+
+        this.renderRecentProducts();
+        utils.api.search.search('"Mens Slim Jeans"', { template: 'search/quick-product-details', section: 'product' }, (err, response) => {
+            if (err) {
+                return false;
+            }
+
+            const ele = $('<div></div>');
+            ele.html(response);
+            const colorSwatches = [];
+            $('.productInfo-id', ele).each((index, item) => {
+                colorSwatches.push($(item).html());
+            });
+            const swatchPatterns = [];
+            colorSwatches.forEach((productId) => {
+                utils.api.product.getById(productId, { template: 'products/product-info' }, (e, res) => {
+                    if (e) {
+                        return false;
+                    }
+                    const ele2 = $('<div></div>');
+                    ele2.html(res);
+                    swatchPatterns.push({
+                        id: productId,
+                        pattern: $('.pattern-image', ele2).eq(1).html(),
+                    });
+                });
+            });
+        });
     }
 
     /**
@@ -75,102 +125,126 @@ export default class ProductDetails {
         return formData;
     }
 
-    setProductVariant() {
-        const unsatisfiedRequiredFields = [];
+    getDefaultVariantOptions() {
+        const productSku = $('#product_sku').val();
+        const arr = productSku.split('_'); // "['SKU', 'pId', 'option1', 'option2' ....]"
+        return arr.slice(2, -1);
+    }
+
+    listPurchasableSkus() {
+        // const defaultOptions = this.getDefaultVariantOptions();
+        const productOptionsArr = $('[data-product-option-change] [data-product-attribute="set-rectangle"]').length;
         const options = [];
-
-        $.each($('[data-product-attribute]'), (index, value) => {
-            const optionLabel = value.children[0].innerText;
-            const optionTitle = optionLabel.split(':')[0].trim();
-            const required = optionLabel.toLowerCase().includes('required');
-            const type = value.getAttribute('data-product-attribute');
-
-            if ((type === 'input-file' || type === 'input-text' || type === 'input-number') && value.querySelector('input').value === '' && required) {
-                unsatisfiedRequiredFields.push(value);
-            }
-
-            if (type === 'textarea' && value.querySelector('textarea').value === '' && required) {
-                unsatisfiedRequiredFields.push(value);
-            }
-
-            if (type === 'date') {
-                const isSatisfied = Array.from(value.querySelectorAll('select')).every((select) => select.selectedIndex !== 0);
-
-                if (isSatisfied) {
-                    const dateString = Array.from(value.querySelectorAll('select')).map((x) => x.value).join('-');
-                    options.push(`${optionTitle}:${dateString}`);
-
-                    return;
+        for (let index = 0; index < productOptionsArr; index++) {
+            $.each($('[data-product-option-change] [data-product-attribute="set-rectangle"]').eq(index).find('.form-option'), (id, value) => {
+                const optionVal = $(value).data('product-attribute-value');
+                const optionData = $(value).data('attr-label');
+                if (options[index] === undefined) {
+                    options[index] = [];
                 }
-
-                if (required) {
-                    unsatisfiedRequiredFields.push(value);
-                }
-            }
-
-            if (type === 'set-select') {
-                const select = value.querySelector('select');
-                const selectedIndex = select.selectedIndex;
-
-                if (selectedIndex !== 0) {
-                    options.push(`${optionTitle}:${select.options[selectedIndex].innerText}`);
-
-                    return;
-                }
-
-                if (required) {
-                    unsatisfiedRequiredFields.push(value);
-                }
-            }
-
-            if (type === 'set-rectangle' || type === 'set-radio' || type === 'swatch' || type === 'input-checkbox' || type === 'product-list') {
-                const checked = value.querySelector(':checked');
-                if (checked) {
-                    if (type === 'set-rectangle' || type === 'set-radio' || type === 'product-list') {
-                        const label = checked.labels[0].innerText;
-                        if (label) {
-                            options.push(`${optionTitle}:${label}`);
-                        }
-                    }
-
-                    if (type === 'swatch') {
-                        const label = checked.labels[0].children[0];
-                        if (label) {
-                            options.push(`${optionTitle}:${label.title}`);
-                        }
-                    }
-
-                    if (type === 'input-checkbox') {
-                        options.push(`${optionTitle}:Yes`);
-                    }
-
-                    return;
-                }
-
-                if (type === 'input-checkbox') {
-                    options.push(`${optionTitle}:No`);
-                }
-
-                if (required) {
-                    unsatisfiedRequiredFields.push(value);
-                }
-            }
-        });
-
-        let productVariant = unsatisfiedRequiredFields.length === 0 ? options.sort().join(', ') : 'unsatisfied';
-        const view = $('.productView');
-
-        if (productVariant) {
-            productVariant = productVariant === 'unsatisfied' ? '' : productVariant;
-            if (view.attr('data-event-type')) {
-                view.attr('data-product-variant', productVariant);
-            } else {
-                const productName = view.find('.productView-title')[0].innerText;
-                const card = $(`[data-name="${productName}"]`);
-                card.attr('data-product-variant', productVariant);
-            }
+                options[index].push({
+                    value: optionVal,
+                    data: optionData,
+                });
+            });
         }
     }
+
+    // setProductVariant() {
+    //     const unsatisfiedRequiredFields = [];
+    //     const options = [];
+    //     $.each($('[data-product-attribute]'), (index, value) => {
+    //         const optionLabel = value.children[0].innerText;
+    //         const optionTitle = optionLabel.split(':')[0].trim();
+    //         const required = optionLabel.toLowerCase().includes('required');
+    //         const type = value.getAttribute('data-product-attribute');
+
+    //         if ((type === 'input-file' || type === 'input-text' || type === 'input-number') && value.querySelector('input').value === '' && required) {
+    //             unsatisfiedRequiredFields.push(value);
+    //         }
+
+    //         if (type === 'textarea' && value.querySelector('textarea').value === '' && required) {
+    //             unsatisfiedRequiredFields.push(value);
+    //         }
+
+    //         if (type === 'date') {
+    //             const isSatisfied = Array.from(value.querySelectorAll('select')).every((select) => select.selectedIndex !== 0);
+
+    //             if (isSatisfied) {
+    //                 const dateString = Array.from(value.querySelectorAll('select')).map((x) => x.value).join('-');
+    //                 options.push(`${optionTitle}:${dateString}`);
+
+    //                 return;
+    //             }
+
+    //             if (required) {
+    //                 unsatisfiedRequiredFields.push(value);
+    //             }
+    //         }
+
+    //         if (type === 'set-select') {
+    //             const select = value.querySelector('select');
+    //             const selectedIndex = select.selectedIndex;
+
+    //             if (selectedIndex !== 0) {
+    //                 options.push(`${optionTitle}:${select.options[selectedIndex].innerText}`);
+
+    //                 return;
+    //             }
+
+    //             if (required) {
+    //                 unsatisfiedRequiredFields.push(value);
+    //             }
+    //         }
+
+    //         if (type === 'set-rectangle' || type === 'set-radio' || type === 'swatch' || type === 'input-checkbox' || type === 'product-list') {
+    //             const checked = value.querySelector(':checked');
+    //             if (checked) {
+    //                 if (type === 'set-rectangle' || type === 'set-radio' || type === 'product-list') {
+    //                     const label = checked.labels[0].innerText;
+    //                     if (label) {
+    //                         options.push(`${optionTitle}:${label}`);
+    //                     }
+    //                 }
+
+    //                 if (type === 'swatch') {
+    //                     const label = checked.labels[0].children[0];
+    //                     if (label) {
+    //                         options.push(`${optionTitle}:${label.title}`);
+    //                     }
+    //                 }
+
+    //                 if (type === 'input-checkbox') {
+    //                     options.push(`${optionTitle}:Yes`);
+    //                 }
+
+    //                 return;
+    //             }
+
+    //             if (type === 'input-checkbox') {
+    //                 options.push(`${optionTitle}:No`);
+    //             }
+
+    //             if (required) {
+    //                 unsatisfiedRequiredFields.push(value);
+    //             }
+    //         }
+    //     });
+
+    //     let productVariant = unsatisfiedRequiredFields.length === 0 ? options.sort().join(', ') : 'unsatisfied';
+    //     const view = $('.productView');
+
+    //     if (productVariant) {
+    //         productVariant = productVariant === 'unsatisfied' ? '' : productVariant;
+    //         if (view.attr('data-event-type')) {
+    //             view.attr('data-product-variant', productVariant);
+    //         } else {
+    //             const productName = view.find('.productView-title')[0].innerText;
+    //             const card = $(`[data-name="${productName}"]`);
+    //             card.attr('data-product-variant', productVariant);
+    //         }
+    //     }
+    // }
 
     /**
      * Since $productView can be dynamically inserted using render_with,
@@ -253,38 +327,37 @@ export default class ProductDetails {
         const $changedOption = $(event.target);
         const $form = $changedOption.parents('form');
         const productId = $('[name="product_id"]', $form).val();
+        const productSkuOptions = $('.productView-options .form-field[data-product-attribute="set-rectangle"]');
 
-        // Do not trigger an ajax request if it's a file or if the browser doesn't support FormData
-        if ($changedOption.attr('type') === 'file' || window.FormData === undefined) {
-            return;
-        }
-
-        utils.api.productAttributes.optionChange(productId, $form.serialize(), 'products/bulk-discount-rates', (err, response) => {
-            const productAttributesData = response.data || {};
-            const productAttributesContent = response.content || {};
-            this.updateProductAttributes(productAttributesData);
-            this.updateView(productAttributesData, productAttributesContent);
-        });
-    }
-
-    showProductImage(image) {
-        if (_.isPlainObject(image)) {
-            const zoomImageUrl = utils.tools.image.getSrc(
-                image.data,
-                this.context.themeSettings.zoom_size,
-            );
-
-            const mainImageUrl = utils.tools.image.getSrc(
-                image.data,
-                this.context.themeSettings.product_size,
-            );
-
-            this.imageGallery.setAlternateImage({
-                mainImageUrl,
-                zoomImageUrl,
-            });
+        if (productSkuOptions.length > 1) {
+            if ($changedOption.data('sku') === $(productSkuOptions[1]).data('sku')) {
+                utils.api.productAttributes.optionChange(productId, $form.serialize(), 'products/bulk-discount-rates', (err, response) => {
+                    const productAttributesData = response.data || {};
+                    const productAttributesContent = response.content || {};
+                    this.updateProductAttributes(productAttributesData);
+                    this.updateView(productAttributesData, productAttributesContent);
+                });
+            } else {
+                $.each($(productSkuOptions[1]).find('.form-radio'), (id, value) => {
+                    $(value).prop('checked', true);
+                    $(value).removeClass('hidden');
+                    utils.api.productAttributes.optionChange(productId, $form.serialize(), 'products/bulk-discount-rates', (err, response) => {
+                        $(`[data-product-attribute-value="${$(value).val()}"]`).removeClass('hidden');
+                        if (!response.data.purchasable) {
+                            $(value).addClass('hidden');
+                            $(`[data-product-attribute-value="${$(value).val()}"]`).addClass('hidden');
+                        }
+                        $(value).prop('checked', false);
+                    });
+                });
+            }
         } else {
-            this.imageGallery.restoreImage();
+            utils.api.productAttributes.optionChange(productId, $form.serialize(), 'products/bulk-discount-rates', (err, response) => {
+                const productAttributesData = response.data || {};
+                const productAttributesContent = response.content || {};
+                this.updateProductAttributes(productAttributesData);
+                this.updateView(productAttributesData, productAttributesContent);
+            });
         }
     }
 
@@ -540,7 +613,6 @@ export default class ProductDetails {
      */
     updateView(data, content = null) {
         const viewModel = this.getViewModel(this.$scope);
-
         this.showMessageBox(data.stock_message || data.purchasing_message);
 
         if (_.isObject(data.price)) {
@@ -614,8 +686,6 @@ export default class ProductDetails {
         const behavior = data.out_of_stock_behavior;
         const inStockIds = data.in_stock_attributes;
         const outOfStockMessage = ` (${data.out_of_stock_message})`;
-
-        this.showProductImage(data.image);
 
         if (behavior !== 'hide_option' && behavior !== 'label_option') {
             return;
@@ -734,5 +804,49 @@ export default class ProductDetails {
                     .removeClass('is-active');
             }
         }
+    }
+
+    renderRecentProducts() {
+        const productId = $('#product_id').val();
+        const productImage = $('#product_image').val();
+        const productUrl = $('#product_url').val();
+        const productTitle = $('#product_title').val();
+        let recentlyProducts = JSON.parse(window.localStorage.getItem('recentlyViewedProducts'));
+        if (recentlyProducts === null) {
+            recentlyProducts = [];
+        } else {
+            recentlyProducts = recentlyProducts.filter(item => item.id !== productId);
+        }
+        let recentProductsContent = '';
+
+        for (let i = 0; i < recentlyProducts.length; i++) {
+            recentProductsContent += `<div class="feature-row" ><a href="${recentlyProducts[i].url}" ><img class="feature-row__image" src="${recentlyProducts[i].images}"  tabindex="-1" /><span class="slick-figoverlay" >${recentlyProducts[i].title}</span></a></div>`;
+        }
+        $('.recent-products-slick').html(recentProductsContent);
+        if (recentlyProducts.length > 0) $('.recent-products').removeClass('hidden');
+        $('.recent-products-slick').slick({
+            infinite: true,
+            dots: false,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            speed: 500,
+            responsive: [
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    },
+                },
+            ],
+        });
+        recentlyProducts.push({
+            id: productId,
+            images: productImage,
+            url: productUrl,
+            title: productTitle,
+        });
+        if (recentlyProducts.length > 6) recentlyProducts.shift();
+        window.localStorage.setItem('recentlyViewedProducts', JSON.stringify(recentlyProducts));
     }
 }

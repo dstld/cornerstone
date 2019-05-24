@@ -1,0 +1,49 @@
+.afterpay-banner {
+  background: stencilColor('color-greyDarkest');
+  color: stencilColor('color-white');
+  text-align: center;
+  text-transform: uppercase;
+  padding: stencilNumber("padding-small") * 2.4 0;
+  font-size: 1rem;
+  font-weight: fontWeight("semibold");
+
+  img {
+    width: 45%;
+    display: block;
+    margin: stencilNumber("padding-small") auto;
+    max-width: remCalc(200px);
+  }
+  span {
+    margin-right: remCalc(6px);
+  }
+  em {
+    font-weight: fontWeight("bold");
+    font-style: normal;
+  }
+
+  .visible-xs {
+    display: block;
+  }
+  .hidden-xs {
+    display: none;
+  }
+
+  @include breakpoint("medium") {
+    text-align: left;
+    padding: remCalc(40px) remCalc(24px);  
+    font-size: $fontSize-root;
+
+    .visible-xs {
+      display: none;
+    }
+    .hidden-xs {
+      display: inline-block;
+    }
+    img {
+      width: 100%;
+      display: inline-block;
+      margin: remCalc(-15px) remCalc(25px) remCalc(-15px) 0;
+    }
+  }
+
+}

@@ -10,24 +10,32 @@ product:
         limit: {{theme_settings.productpage_similar_by_views_count}}
 ---
 {{#partial "page"}}
-    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    <main class="product container-fluid">
+        <div class="row">
+            {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+        </div>
+        <div class="row">
+            {{#each product.shipping_messages}}
+                {{> components/common/alert-info message}}
+            {{/each}}
+        </div>
+        <div class="row">
+            <div class="container" itemscope itemtype="http://schema.org/Product">
+                <div class="row">
+                    {{> components/products/product-view schema=true  }}
 
-    {{#each product.shipping_messages}}
-        {{> components/common/alert-info message}}
-    {{/each}}
+                    {{#if product.videos.list.length}}
+                        {{> components/products/videos product.videos}}
+                    {{/if}}
 
-    <div itemscope itemtype="http://schema.org/Product">
-        {{> components/products/product-view schema=true  }}
+                    {{#all settings.show_product_reviews (if theme_settings.show_product_reviews_tabs '!==' true)}}
+                        {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
+                    {{/all}}
 
-        {{#if product.videos.list.length}}
-            {{> components/products/videos product.videos}}
-        {{/if}}
-
-        {{#all settings.show_product_reviews (if theme_settings.show_product_reviews_tabs '!==' true)}}
-            {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
-        {{/all}}
-
-        {{> components/products/tabs}}
-    </div>
+                    {{> components/products/tabs}}
+                </div>
+            </div>
+        </div>
+    </main>
 {{/partial}}
 {{> layout/base}}

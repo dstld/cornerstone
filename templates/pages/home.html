@@ -11,11 +11,7 @@ blog:
     recent_posts:
         limit: {{theme_settings.homepage_blog_posts_count}}
 ---
-{{#partial "hero"}}
-    {{#if carousel}}
-        {{> components/carousel arrows=theme_settings.homepage_show_carousel_arrows}}
-    {{/if}}
-{{/partial}}
+
 
 {{#partial "page"}}
 
@@ -23,18 +19,22 @@ blog:
         {{> components/common/alert-info message}}
     {{/each}}
 
-<div class="main full">
-    {{#if products.featured}}
-        {{> components/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count}}
-    {{/if}}
+    <div class="main full">
+        {{> components/page/home-intro }}
+        
+        {{> components/page/afterpay-banner }}
 
-    {{#if products.top_sellers}}
-        {{> components/products/top products=products.top_sellers columns=theme_settings.homepage_top_products_column_count}}
-    {{/if}}
+        {{> components/page/home-hero }}
 
-    {{#if products.new}}
-        {{> components/products/new products=products.new columns=theme_settings.homepage_new_products_column_count}}
-    {{/if}}
+        {{#if products.featured}}
+            {{> components/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count}}
+        {{/if}}
+
+        {{#if products.top_sellers}}
+            {{> components/products/top products=products.top_sellers columns=theme_settings.homepage_top_products_column_count}}
+        {{/if}}
+
+        {{> components/page/home-mantra }}
 </div>
 {{/partial}}
 {{> layout/base}}

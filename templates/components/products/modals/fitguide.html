@@ -1,0 +1,229 @@
+
+
+<div id="fitguideModal" class="modal modal--large pdp-modal" data-reveal>
+    <a href="#" class="modal-close" aria-label="{{lang 'common.close'}}" role="button">
+      <span aria-hidden="true">&#215;</span>
+    </a>
+    <div class="modal-content fit-guide">
+      <h3 class="pdp-content__name">Fit Guide</h3>
+      <h4>{{ product.title }}</h4>
+      <ul class="nav nav-tabs">
+        <li><a data-id="0" href="#" class="active">US</a></li>
+        <li ><a data-id="1" href="#">International</a></li>
+      </ul>
+      <div class="tab-section-content">
+        <div class="tab-content__item active">
+          {{#each product.custom_fields}}
+            {{#if name 'fitguide_image' }}
+              <img
+                class="lazy size-chart" data-src="{{value}}"
+              >
+            {{/if}}
+          {{/each}}
+          {{#each product.category }}
+            {{#if @first }}
+              {{#if this '===' 'women' }}
+                <div class="womens-size-conversion">
+                  <table class="international-size-chart">
+                    <tbody>
+                      <tr>
+                        <td>Pants Size</td>
+                        <td>00</td>
+                        <td>0</td>
+                        <td>2</td>
+                        <td>4</td>
+                        <td>6</td>
+                        <td>8</td>
+                        <td>10</td>
+                        <td>12</td>
+                      </tr>
+                      <tr>
+                        <td>DSTLD Size</td>
+                        <td>&nbsp;24/0&nbsp;</td>
+                        <td>&nbsp;25/2&nbsp;</td>
+                        <td>&nbsp;26/4&nbsp;</td>
+                        <td>&nbsp;27/6&nbsp;</td>
+                        <td>&nbsp;28/8&nbsp;</td>
+                        <td>&nbsp;29/10&nbsp;</td>
+                        <td>30/31 12/14</td>
+                        <td>&nbsp;32/16&nbsp;</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div> 
+              </div>
+              <div class="tab-content__item">
+                <div class="international-size-chart-wrapper womens-chart">
+                  <table class="international-size-chart international-size-chart__womens">
+                    <tbody>
+                      <tr>
+                        <th>US</th>
+                        <th>00</th>
+                        <th>0</th>
+                        <th>2-4</th>
+                        <th>4-6</th>
+                        <th>8</th>
+                        <th>10</th>
+                        <th>12</th>
+                      </tr>
+                      <tr>
+                        <td>UK</td>
+                        <td>4</td>
+                        <td>6</td>
+                        <td>8</td>
+                        <td>10</td>
+                        <td>12</td>
+                        <td>14</td>
+                        <td>16</td>
+                      </tr>
+                      <tr>
+                        <td>Italy</td>
+                        <td>36</td>
+                        <td>38</td>
+                        <td>40</td>
+                        <td>42</td>
+                        <td>44</td>
+                        <td>46</td>
+                        <td>48</td>
+                      </tr>
+                      <tr>
+                        <td>France</td>
+                        <td>32</td>
+                        <td>34</td>
+                        <td>36</td>
+                        <td>38</td>
+                        <td>40</td>
+                        <td>42</td>
+                        <td>44</td>
+                      </tr>
+                      <tr>
+                        <td>Denmark</td>
+                        <td>30</td>
+                        <td>32</td>
+                        <td>34</td>
+                        <td>36</td>
+                        <td>38</td>
+                        <td>40</td>
+                        <td>42</td>
+                      </tr>
+                      <tr>
+                        <td>Germany</td>
+                        <td>30</td>
+                        <td>32</td>
+                        <td>34</td>
+                        <td>36</td>
+                        <td>38</td>
+                        <td>40</td>
+                        <td>42</td>
+                      </tr>
+                      <tr>
+                        <td>Australia</td>
+                        <td>4</td>
+                        <td>6</td>
+                        <td>8</td>
+                        <td>10</td>
+                        <td>12</td>
+                        <td>14</td>
+                        <td>16</td>
+                      </tr>
+                      <tr>
+                        <td>Japan</td>
+                        <td>3</td>
+                        <td>5</td>
+                        <td>7</td>
+                        <td>9</td>
+                        <td>11</td>
+                        <td>13</td>
+                        <td>15</td>
+                      </tr>
+                      <tr>
+                        <td>Jeans</td>
+                        <td>23</td>
+                        <td>24-25</td>
+                        <td>26-27</td>
+                        <td>27-28</td>
+                        <td>29-30</td>
+                        <td>31-32</td>
+                        <td>32-33</td>
+                      </tr>
+                      <tr>
+                        <td>Size</td>
+                        <td>XXS</td>
+                        <td>XXS-XS</td>
+                        <td>XS-S</td>
+                        <td>S-M</td>
+                        <td>M-L</td>
+                        <td>L-XL</td>
+                        <td>XL-XXL</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            {{else}}
+              </div>
+              <div class="tab-content__item">
+                <div class="international-size-chart-wrapper">
+                  <table class="international-size-chart">
+                    <tbody>
+                      <tr>
+                        <td>mens</td>
+                        <td>xs</td>
+                        <td>s</td>
+                        <td>m</td>
+                        <td>l</td>
+                        <td>xl</td>
+                      </tr>
+                      <tr>
+                        <td>european (EU)</td>
+                        <td>44</td>
+                        <td>46</td>
+                        <td>48</td>
+                        <td>50</td>
+                        <td>52</td>
+                      </tr>
+                      <tr>
+                        <td>french (FR)</td>
+                        <td>44</td>
+                        <td>46</td>
+                        <td>48</td>
+                        <td>50</td>
+                        <td>52</td>
+                      </tr>
+                      <tr>
+                        <td>italian (IT)</td>
+                        <td>44</td>
+                        <td>46</td>
+                        <td>48</td>
+                        <td>50</td>
+                        <td>52</td>
+                      </tr>
+                      <tr>
+                        <td>UK/US chest</td>
+                        <td>34</td>
+                        <td>36</td>
+                        <td>38</td>
+                        <td>40</td>
+                        <td>42</td>
+                      </tr>
+                      <tr>
+                        <td>UK/US waist</td>
+                        <td>28</td>
+                        <td>30</td>
+                        <td>32</td>
+                        <td>34</td>
+                        <td>36</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            {{/if}}
+          {{/if}}
+        {{/each}}
+      </div>
+      <h3 class="pdp-content__name">Try Multiple Sizes</h3>
+      <p class="try-multiple-sizes-description">Unsure about your perfect fit in DSTLD? Audition our denim in the comfort of your home with free shipping and returns.</p>
+    </div>
+    <div class="loadingOverlay"></div>
+</div>

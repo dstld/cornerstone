@@ -1,0 +1,15 @@
+.home-intro {
+  padding: stencilNumber("padding-small") * 2.4 0;
+
+  @include breakpoint("medium") {
+    padding: stencilNumber("padding-small") * 2.4;
+  }
+
+  h1 {
+    font-weight: fontWeight("bold");
+    font-size: $fontSize-root * 1.5;
+    line-height: lineHeight("small");
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+  }
+}

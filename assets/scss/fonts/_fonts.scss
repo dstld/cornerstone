@@ -1,7 +1,31 @@
-@import "clear-sans";
+@font-face {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: fontWeight("thin");
+  src: url("../fonts/HelveticaNeue-Thin.woff") format("woff");
+}
 
-$fonts: $fontFamily-sans $fontFamily-serif $fontFamily-mono $fontFamily-headings $fontFamily-hero;
-
-@if contains($fonts, "'Clear Sans', sans-serif") {
-    @include clear-sans;
+@font-face {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: fontWeight("normal");
+  src: url("../fonts/HelveticaNeue-Light.woff") format("woff");
+}
+@font-face {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: fontWeight("semibold");
+  src: url("../fonts/HelveticaNeue-Medium.woff") format("woff");
+}
+@font-face {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: fontWeight(bold);
+  src: url("../fonts/HelveticaNeue-Bold.woff") format("woff");
+}
+@font-face {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: fontWeight(black);
+  src: url("../fonts/HelveticaNeue-Black.woff") format("woff");
 }

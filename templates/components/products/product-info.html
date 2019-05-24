@@ -1,0 +1,11 @@
+<div data-product-option-change style="display:none;">
+    {{#each product.options}}
+        {{#if display_name '===' 'Color'}}
+            {{#each this.values}}
+                {{#if @last}}
+                    <span class="pattern-image">{{getImage image 'core-swatch'}}</span>
+                {{/if}}
+            {{/each}}
+        {{/if}}
+    {{/each}}
+</div>

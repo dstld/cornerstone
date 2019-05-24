@@ -8,22 +8,12 @@
     width: auto;
 }
 
-.grid-container {
-    padding: 0 remCalc(40px) remCalc(32px);
-    
-    .product {
-        .breadcrumbs {
-            display: none;
+.pdp {
+    .breadcrumbs {
+        display: none;
 
-            @include breakpoint("medium") {
-                display: block;
-            }   
-        }
-        .container {
-            padding: 0 0 stencilNumber("padding-normal") * 2;
-            padding-left: stencilNumber("padding-normal") * 2 !important;
-            padding-right: stencilNumber("padding-normal") * 2 !important;
-            overflow-x: hidden;
-        }
+        @include breakpoint("medium") {
+            display: block;
+        }   
     }
 }

@@ -1,7 +1,27 @@
 <ul class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
     {{#forEach breadcrumbs}}
-        {{#if total '>' 2}}
-            {{#unless isFirst}}
+        {{#if total '>' 3}}
+            {{#unless isLast}}
+                {{#unless isFirst}}
+                    <li class="breadcrumb {{#if isLast}}is-active{{/if}}" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                        {{#or isLast (if url "==" null)}}
+                            <meta itemprop="item" content="{{url}}">
+                            <span class="breadcrumb-label" itemprop="name">{{name}}</span>
+                        {{else}}
+                            <a href="{{url}}" class="breadcrumb-label" itemprop="item"><span itemprop="name">{{name}}</span></a>
+                        {{/or}}
+                        <meta itemprop="position" content="{{add @index 1}}" />
+                    </li>
+                {{/unless}}
+            {{/unless}}
+        {{else}}
+            {{#if total '===' 3}}
+                {{#unless isLast}}
+                    <li class="breadcrumb" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                        <a href="{{url}}" class="breadcrumb-label" itemprop="item"><span itemprop="name">{{name}}</span></a>
+                    </li>
+                {{/unless}}
+            {{ else }}
                 <li class="breadcrumb {{#if isLast}}is-active{{/if}}" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
                     {{#or isLast (if url "==" null)}}
                         <meta itemprop="item" content="{{url}}">
@@ -11,17 +31,7 @@
                     {{/or}}
                     <meta itemprop="position" content="{{add @index 1}}" />
                 </li>
-            {{/unless}}
-        {{ else }}
-            <li class="breadcrumb {{#if isLast}}is-active{{/if}}" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                {{#or isLast (if url "==" null)}}
-                    <meta itemprop="item" content="{{url}}">
-                    <span class="breadcrumb-label" itemprop="name">{{name}}</span>
-                {{else}}
-                    <a href="{{url}}" class="breadcrumb-label" itemprop="item"><span itemprop="name">{{name}}</span></a>
-                {{/or}}
-                <meta itemprop="position" content="{{add @index 1}}" />
-            </li>
+            {{/if}}
         {{/if}}
     {{/forEach}}
 </ul>

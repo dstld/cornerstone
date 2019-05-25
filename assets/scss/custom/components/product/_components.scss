@@ -56,6 +56,8 @@
     }
   }
   .pdp-details {
+    margin-top: 2px;
+    
     .title {
       font-size: 18px;
       line-height: 24px;
@@ -89,6 +91,7 @@
         font-size: 10px;
         font-weight: fontWeight("normal");
         text-transform: uppercase;
+        letter-spacing: .1px;
 
         .afterpay-logo {
           position: relative;
@@ -174,28 +177,42 @@
         text-align: left;
         margin-bottom: stencilNumber("padding-small");
 
-        .form-label {
+        .label--alternate {
             text-align: left;
             font-weight: fontWeight("bold");
-            margin-top: stencilNumber("padding-normal");
             margin-bottom: stencilNumber("padding-small") * .5;
+            font-size: 12px;
+            letter-spacing: .5px;
         }
-        input[type="radio"] + label {
-            margin-left: 0rem;
-            margin-right: 0.5rem;
-            margin-bottom: 0.25rem;
+        .variant-option {
+          border: 1px solid #ccc;
+          display: inline-block;
+          cursor: pointer;
+          min-width: 35px;
+          height: 35px;
+          line-height: 33px;
+          text-align: center;
+          margin-right: 2px;
+          margin-bottom: 5px;
+          margin-left: 0;
+          padding: 0;
+          transition: .2s;
+         
+          .variant-label {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            padding: 0 7px 1px;
+            border: 1px solid transparent;
+            text-transform: capitalize;
+          }
         }
-        .form-option span {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4px 8px 4px;
-            min-width: unset;
-            font-weight: fontWeight("bold");
-        }
-        .form-radio:checked + .form-option {
+        .form-radio:checked + .variant-option {
             background: stencilColor('navUser-color');
             color: stencilColor('color-white');
+            .variant-label {
+              font-weight: bold;
+            }
         }
       }
     }

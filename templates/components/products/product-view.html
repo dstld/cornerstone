@@ -53,25 +53,8 @@
         </section>
 
         <section class="pdp-details col-12 col-sm-6">
-            <h1 class="productView-title">{{product.title}}</h1>
-            {{#if product.brand}}
-                <h2 class="productView-brand"{{#if schema}} itemprop="brand" itemscope itemtype="http://schema.org/Brand"{{/if}}>
-                    <a href="{{product.brand.url}}"></a><span {{#if schema}} itemprop="name" {{/if}} >{{product.brand.name}}</span></a>
-                </h2>
-            {{/if}}
-            {{#if product.call_for_price}}
-                <p class="productView-price">
-                    <span>{{product.call_for_price}}</span>
-                </p>
-            {{/if}}
-            <div class="productView-price">
-                {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
-                    {{> components/products/price price=product.price schema_org=schema}}
-                {{else}}
-                    {{> components/common/login-for-pricing}}
-                {{/or}}
-            </div>
-            {{{region name="product_below_price"}}}
+            <h1 class="title">{{product.title}}</h1>
+            {{> components/products/price price=product.price}}
             <div class="productView-options">
                 <form class="form" method="post" action="{{product.cart_url}}" enctype="multipart/form-data"
                     data-cart-item-add>

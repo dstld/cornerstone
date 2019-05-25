@@ -87,7 +87,7 @@
         margin: 6px 0 -6px;
         padding: 4px 0;
         font-size: 10px;
-        font-weight: fontWeight("light");
+        font-weight: fontWeight("normal");
         text-transform: uppercase;
 
         .afterpay-logo {
@@ -95,6 +95,105 @@
           top: -1.5px;
           max-width: 90px !important;
           margin: 6px 1px;
+        }
+      }
+    }
+    .product-options {
+
+      & .form-field {
+        display: none;
+      }
+
+      .form-field[data-class='color-swatch'] {
+        display: block;
+        padding-bottom: stencilNumber("padding-normal");
+        margin: 0;
+        
+        .variant-option-swatch {
+          padding: 2px;
+          margin: 2px;
+          border: solid 1px transparent;
+          width: 30px;
+          height: 30px;
+          box-sizing: content-box;
+          position: relative;
+
+          img {
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+          }
+
+          .variant-option-expandeds {
+            display: inline-block;
+            font-size: 12px;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translate(-50%, 0);
+            transition: all .3s linear;
+            opacity: 0;
+            width: max-content;
+            font-weight: 700;
+            border-radius: 3px;
+            text-transform: capitalize;
+            border: 1px solid lightgray;
+            padding: 4px 8px 2px;
+            background: #000;
+            color: #fff;
+
+            &:before {
+              content: "";
+              width: 0;
+              height: 0; 
+              border-left: 5px solid transparent;
+              border-right: 5px solid transparent;
+              border-top: 5px solid #000;
+              position: absolute;
+              top: 100%;
+              left: calc(50% - 5px);
+            }
+          }
+
+          &:hover {
+              .variant-option-expandeds {
+                  opacity: 1;
+                  transition: all .3s linear;
+              }
+          }
+        }
+        .form-radio:checked + .variant-option-swatch {
+          border: solid 1px #0a0a0a;
+        }
+      }
+
+      .form-field[data-product-attribute="set-rectangle"] {
+        display: block;
+        text-align: left;
+        margin-bottom: stencilNumber("padding-small");
+
+        .form-label {
+            text-align: left;
+            font-weight: fontWeight("bold");
+            margin-top: stencilNumber("padding-normal");
+            margin-bottom: stencilNumber("padding-small") * .5;
+        }
+        input[type="radio"] + label {
+            margin-left: 0rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+        .form-option span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 8px 4px;
+            min-width: unset;
+            font-weight: fontWeight("bold");
+        }
+        .form-radio:checked + .form-option {
+            background: stencilColor('navUser-color');
+            color: stencilColor('color-white');
         }
       }
     }

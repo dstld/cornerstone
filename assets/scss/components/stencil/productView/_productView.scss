@@ -333,10 +333,6 @@
     }
 
     [data-product-option-change] {
-        & > .form-field {
-            display: none;
-        }
-
         .form-field[data-product-attribute="set-rectangle"] {
             display: block;
             text-align: left;

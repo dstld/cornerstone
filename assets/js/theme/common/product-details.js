@@ -27,6 +27,7 @@ export default class ProductDetails {
         const $form = $('form[data-cart-item-add]', $scope);
         this.listPurchasableSkus();
         const $productOptionsElement = $('[data-product-option-change]', $form);
+        console.log('----------', $productOptionsElement);
         const hasOptions = $productOptionsElement.html().trim().length;
         const hasDefaultOptions = $productOptionsElement.find('[data-default]').length;
 
@@ -327,7 +328,7 @@ export default class ProductDetails {
         const $changedOption = $(event.target);
         const $form = $changedOption.parents('form');
         const productId = $('[name="product_id"]', $form).val();
-        const productSkuOptions = $('.productView-options .form-field[data-product-attribute="set-rectangle"]');
+        const productSkuOptions = $('.product-options .form-field[data-product-attribute="set-rectangle"]');
 
         if (productSkuOptions.length > 1) {
             if ($changedOption.data('sku') === $(productSkuOptions[1]).data('sku')) {

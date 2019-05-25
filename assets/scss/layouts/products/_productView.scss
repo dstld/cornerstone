@@ -23,26 +23,8 @@
     }
 }
 
-.productView-images {
-    @include grid-column(12);
-    padding-left: spacing("base");
-    padding-right: spacing("base");
-
-    @include breakpoint("medium") {
-        width: grid-calc(6, $total-columns);
-    }
-}
-
-.productView-details {
-    @include grid-column(12);
-    padding-left: spacing("base");
-    padding-right: spacing("base");
-
-    @include breakpoint("medium") {
-        clear: right;
-        float: right;
-        width: grid-calc(6, $total-columns);
-    }
+.pdp-details {
+    padding: 0 6em 0 3em;
 }
 
 .productView-description {

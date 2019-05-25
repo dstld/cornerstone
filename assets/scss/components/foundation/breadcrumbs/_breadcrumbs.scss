@@ -20,21 +20,21 @@
     border-top: solid 1px lightgray;
     margin: 3px 40px 20px;
     width: 100%;
-}
 
-.breadcrumb {
-    display: inline-block;
-    float: none;
+    .breadcrumb {
+        display: inline-block;
+        float: none;
 
-    &.is-active {
+        &.is-active {
 
-        // scss-lint:disable NestingDepth
-        > .breadcrumb-label {
-            cursor: text;
+            // scss-lint:disable NestingDepth
+            > .breadcrumb-label {
+                cursor: text;
+            }
         }
     }
-}
 
-.breadcrumb-label {
-    text-decoration: none;
+    .breadcrumb-label {
+        text-decoration: none;
+    }
 }

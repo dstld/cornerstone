@@ -8,8 +8,9 @@ export default class ImageGallery {
 
     initFlexSlider() {
         $('.flexslider').flexslider({
-            animation: 'slide',
+            animation: 'fade',
             controlNav: 'thumbnails',
+            animationLoop: false,
         });
     }
 }

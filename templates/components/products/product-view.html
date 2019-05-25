@@ -1,59 +1,58 @@
-<div class="pdp-product-view" {{#if settings.data_tag_enabled}} data-event-type="product" data-entity-id="{{product.id}}" data-name="{{product.title}}" data-product-category="{{#each product.category}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}}" data-product-brand="{{product.brand.name}}" data-product-price="{{#if product.price.with_tax}}{{product.price.with_tax.value}}{{else}}{{product.price.without_tax.value}}{{/if}}" data-product-variant="single-product-option"{{/if}}>
-{{#each product.reviews.messages}}
-        {{#if error}}
-            {{> components/common/alert-error error}}
-        {{/if}}
-        {{#if success}}
-            {{> components/common/alert-success success}}
-        {{/if}}
-    {{/each}}
-
-    <section class="productView-images col-sm-6" data-image-gallery>
-        <div class="flexslider">
-            <ul class="slides">
-                {{#each product.images}}
-                    <li data-thumb="{{getImage this 'zoom_size'}}">
-                        <img 
-                            class="lazyload"
-                            data-sizes="auto"
-                            src="{{cdn 'img/loading.svg'}}" 
-                            data-src="{{getImage this 'zoom_size'}}"
-                        >
-                    </li>
-                {{/each}}
-            </ul>
-        </div>
-    </section>
-
-    <section class="productView-mobile-images col-12" >
-        <div class="image-viewer">
-            <img src="{{cdn 'img/expand-icon.png'}}" class="fa-expand pdp-mobile-zoomCtrl" aria-hidden="true" />
-            <div id="pdp-mobile-flexslider" class="pdp-mobile-flexslider">
-            {{#each product.images}}
-                <div class="feature-row" data-thumb="{{getImage this 'zoom_size'}}">
-                    <img
-                        class="lazyload feature-row__image"
-                        data-sizes="auto"
-                        src="{{cdn 'img/loading.svg'}}" 
-                        data-src="{{getImage this 'zoom_size'}}"
-                        tabindex="-1"
-                        alt="{{name}}" title="{{name}}"
-                    >
-                </div>
-            {{/each}}
+<div class="pdp-product-view container" {{#if settings.data_tag_enabled}} data-event-type="product" data-entity-id="{{product.id}}" data-name="{{product.title}}" data-product-category="{{#each product.category}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}}" data-product-brand="{{product.brand.name}}" data-product-price="{{#if product.price.with_tax}}{{product.price.with_tax.value}}{{else}}{{product.price.without_tax.value}}{{/if}}" data-product-variant="single-product-option"{{/if}}>
+    <div class="row">
+        {{#each product.reviews.messages}}
+            {{#if error}}
+                {{> components/common/alert-error error}}
+            {{/if}}
+            {{#if success}}
+                {{> components/common/alert-success success}}
+            {{/if}}
+        {{/each}}
+        <section class="col-sm-6" data-image-gallery>
+            <div class="flexslider">
+                <ul class="slides">
+                    {{#each product.images}}
+                        <li data-thumb="{{getImage this 'zoom_size'}}">
+                            <img 
+                                class="lazyload"
+                                data-sizes="auto"
+                                src="{{cdn 'img/logo-d-spacer.png'}}" 
+                                data-src="{{getImage this 'zoom_size'}}"
+                            >
+                        </li>
+                    {{/each}}
+                </ul>
             </div>
-        </div>
-        <div class="mobile-zoom-container hidden">
-            <img src="{{cdn 'img/compress-icon.png'}}" class="fa fa-compress pdp-mobile-zoomCtrl" aria-hidden="true" />
-            <img
-            class="mobile-zoomviewer-image"
-            tabindex="-1"
-            />
-        </div>
-    </section>
+        </section>
 
-    <section class="productView-details col-12 col-sm-6">
-        <div class="productView-product">
+        <section class="productView-mobile-images col-12" >
+            <div class="image-viewer">
+                <img src="{{cdn 'img/expand-icon.png'}}" class="fa-expand pdp-mobile-zoomCtrl" aria-hidden="true" />
+                <div id="pdp-mobile-flexslider" class="pdp-mobile-flexslider">
+                {{#each product.images}}
+                    <div class="feature-row" data-thumb="{{getImage this 'zoom_size'}}">
+                        <img
+                            class="lazyload feature-row__image"
+                            data-sizes="auto"
+                            src="{{cdn 'img/logo-d-spacer.png'}}" 
+                            data-src="{{getImage this 'zoom_size'}}"
+                            tabindex="-1"
+                            alt="{{name}}" title="{{name}}"
+                        >
+                    </div>
+                {{/each}}
+                </div>
+            </div>
+            <div class="mobile-zoom-container hidden">
+                <img src="{{cdn 'img/compress-icon.png'}}" class="fa fa-compress pdp-mobile-zoomCtrl" aria-hidden="true" />
+                <img
+                class="mobile-zoomviewer-image"
+                tabindex="-1"
+                />
+            </div>
+        </section>
+
+        <section class="pdp-details col-12 col-sm-6">
             <h1 class="productView-title">{{product.title}}</h1>
             {{#if product.brand}}
                 <h2 class="productView-brand"{{#if schema}} itemprop="brand" itemscope itemtype="http://schema.org/Brand"{{/if}}>
@@ -73,49 +72,48 @@
                 {{/or}}
             </div>
             {{{region name="product_below_price"}}}
-        </div>
-        <div class="productView-options">
-            <form class="form" method="post" action="{{product.cart_url}}" enctype="multipart/form-data"
-                  data-cart-item-add>
-                <input type="hidden" name="action" value="add">
-                <input type="hidden" name="product_id" value="{{product.id}}"/>
-                <div data-product-option-change style="display:none;">
-                    {{#each product.options}}
-                        {{{dynamicComponent 'components/products/options'}}}
-                    {{/each}}
-                </div>
-                <div class="pdp-fitguide-modelbox">
-                    <a class="size_finder" data-reveal-id="fitguideModal" >Fit Guide</a>
-                    <div class="modelbox">
-                        {{#each product.custom_fields}}
-                            {{#if name 'fitguide_title' }}
-                                <span>{{value}}</span>
-                            {{/if}}
+            <div class="productView-options">
+                <form class="form" method="post" action="{{product.cart_url}}" enctype="multipart/form-data"
+                    data-cart-item-add>
+                    <input type="hidden" name="action" value="add">
+                    <input type="hidden" name="product_id" value="{{product.id}}"/>
+                    <div data-product-option-change style="display:none;">
+                        {{#each product.options}}
+                            {{{dynamicComponent 'components/products/options'}}}
                         {{/each}}
                     </div>
-                </div>
-                {{#if product.can_purchase}}
-                    {{> components/products/add-to-cart}}
-                {{/if}}
-                {{#if product.out_of_stock}}
-                    {{#if product.out_of_stock_message}}
-                        {{> components/common/alert-error product.out_of_stock_message}}
-                    {{else}}
-                        {{> components/common/alert-error (lang 'products.sold_out')}}
+                    <div class="pdp-fitguide-modelbox">
+                        <a class="size_finder" data-reveal-id="fitguideModal" >Fit Guide</a>
+                        <div class="modelbox">
+                            {{#each product.custom_fields}}
+                                {{#if name 'fitguide_title' }}
+                                    <span>{{value}}</span>
+                                {{/if}}
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{#if product.can_purchase}}
+                        {{> components/products/add-to-cart}}
                     {{/if}}
-                {{/if}}
-            </form>
-            <p class="text-left">100% Guaranteed Fit. Free US Shipping + Returns.</p>
-            <div class="pdp-fit-links text-left">
-                <a data-reveal-id="sizeguideModal">Can't Find Your Size?</a>
+                    {{#if product.out_of_stock}}
+                        {{#if product.out_of_stock_message}}
+                            {{> components/common/alert-error product.out_of_stock_message}}
+                        {{else}}
+                            {{> components/common/alert-error (lang 'products.sold_out')}}
+                        {{/if}}
+                    {{/if}}
+                </form>
+                <p class="text-left">100% Guaranteed Fit. Free US Shipping + Returns.</p>
+                <div class="pdp-fit-links text-left">
+                    <a data-reveal-id="sizeguideModal">Can't Find Your Size?</a>
+                </div>
             </div>
-        </div>
 
-        <article class="productView-description"{{#if schema}} itemprop="description"{{/if}}>
-            {{> components/products/description-tabs}}
-        </article>
-    </section>
-
+            <article class="productView-description"{{#if schema}} itemprop="description"{{/if}}>
+                {{> components/products/description-tabs}}
+            </article>
+        </section>
+    </div>
 </div>
 
 <div class="recent-products hidden">

@@ -55,7 +55,7 @@
         <section class="pdp-details col-12 col-sm-6">
             <h1 class="title">{{product.title}}</h1>
             {{> components/products/price price=product.price}}
-            <div class="productView-options">
+            <div class="product-options">
                 <form class="form" method="post" action="{{product.cart_url}}" enctype="multipart/form-data"
                     data-cart-item-add>
                     <input type="hidden" name="action" value="add">

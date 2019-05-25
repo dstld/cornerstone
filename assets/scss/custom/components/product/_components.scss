@@ -156,10 +156,12 @@
           }
 
           &:hover {
-              .variant-option-expandeds {
-                  opacity: 1;
-                  transition: all .3s linear;
-              }
+            border: solid 1px #0a0a0a;
+
+            .variant-option-expandeds {
+                opacity: 1;
+                transition: all .3s linear;
+            }
           }
         }
         .form-radio:checked + .variant-option-swatch {

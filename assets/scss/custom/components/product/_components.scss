@@ -222,6 +222,7 @@
       margin-bottom: stencilNumber("padding-small") * .5;
       font-size: 12px;
       letter-spacing: .5px;
+      font-weight: fontWeight("normal");
 
       .size_finder {
         text-decoration: underline;

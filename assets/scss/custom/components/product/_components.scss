@@ -57,7 +57,7 @@
   }
   .pdp-details {
     margin-top: 2px;
-    
+
     .title {
       font-size: 18px;
       line-height: 24px;
@@ -215,6 +215,40 @@
             }
         }
       }
+    }
+
+    .pdp-fitguide-modelbox {
+      text-align: left;
+      margin-bottom: stencilNumber("padding-small") * .5;
+      font-size: 12px;
+      letter-spacing: .5px;
+
+      .size_finder {
+        text-decoration: underline;
+        width: 100%;
+        display: block;
+        margin-left: 0;
+        padding-left: 0;
+      }
+    }
+
+    #addToCart-btn {
+      background-color: #0A0A0A;
+      color: #fff;
+      border: 2px solid #0A0A0A;
+      margin-bottom: 15px;
+      margin-top: 15px;
+      text-align: center;
+      padding: 16px 15px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: normal;
+      text-transform: uppercase;
+      transition: .2s;
+      border-radius: 0;
+      width: 100%;
+      white-space: normal;
     }
   }
 }

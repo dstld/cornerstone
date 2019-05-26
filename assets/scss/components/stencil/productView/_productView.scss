@@ -588,19 +588,6 @@
     }
 }
 
-.pdp-fitguide-modelbox {
-    text-align: left;
-    margin-bottom: stencilNumber("padding-small") * .5;
-
-    .size_finder {
-      text-decoration: underline;
-      width: 100%;
-      display: block;
-      margin-left: 0;
-      padding-left: 0;
-      padding-top: stencilNumber("padding-small") * .8;
-    }
-}
 .pdp-modal {
     display: none;
     position: fixed;

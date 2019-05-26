@@ -2,35 +2,35 @@
   font-family: "Helvetica";
   font-style: normal;
   font-weight: fontWeight("thin");
-  src: url("../fonts/HelveticaNeue Thin.ttf") format("ttf");
+  src: url("../fonts/HelveticaNeue-Thin.ttf") format("truetype");
 }
 @font-face {
   font-family: "Helvetica";
   font-style: normal;
   font-weight: fontWeight("normal");
-  src: url("../fonts/HelveticaNeue Light.ttf") format("ttf");
+  src: url("../fonts/HelveticaNeue-Light.ttf") format("truetype");
 }
 @font-face {
   font-family: "Helvetica";
   font-style: normal;
   font-weight: fontWeight("medium");
-  src: url("../fonts/HelveticaNeue Normal.ttf") format("ttf");
+  src: url("../fonts/HelveticaNeue-Normal.ttf") format("truetype");
 }
 @font-face {
   font-family: "Helvetica";
   font-style: normal;
   font-weight: fontWeight("semibold");
-  src: url("../fonts/HelveticaNeue Medium.ttf") format("ttf");
+  src: url("../fonts/HelveticaNeue-Medium.ttf") format("truetype");
 }
 @font-face {
   font-family: "Helvetica";
   font-style: normal;
-  font-weight: fontWeight(bold);
-  src: url("../fonts/HelveticaNeue Bold.ttf") format("ttf");
+  font-weight: fontWeight("bold");
+  src: url("../fonts/HelveticaNeue-Bold.ttf") format("truetype");
 }
 @font-face {
   font-family: "Helvetica";
   font-style: normal;
-  font-weight: fontWeight(black);
-  src: url("../fonts/HelveticaNeue BlackCond.ttf") format("ttf");
+  font-weight: 900;
+  src: url("../fonts/HelveticaNeueHv.ttf") format("truetype");
 }

@@ -62,7 +62,7 @@
       font-size: 18px;
       line-height: 24px;
       letter-spacing: 0;
-      font-weight: 400;
+      font-weight: fontWeight("semibold");
       color: stencilColor("color-textBase");
       margin-bottom: 10px;
       margin-top: 0;
@@ -80,6 +80,7 @@
         font-size: 13px;
         line-height: 1.5;
         letter-spacing: normal;
+        font-weight: fontWeight("normal");
         margin-bottom: stencilNumber("padding-normal");
         color: stencilColor("color-primaryDark");
       }
@@ -88,8 +89,8 @@
         margin: .5rem 0;
         margin: 6px 0 -6px;
         padding: 4px 0;
-        font-size: 10px;
-        font-weight: fontWeight("normal");
+        font-size: 11px;
+        font-weight: fontWeight("medium");
         text-transform: uppercase;
         letter-spacing: .1px;
 
@@ -220,7 +221,7 @@
     .pdp-fitguide-modelbox {
       text-align: left;
       margin-bottom: stencilNumber("padding-small") * .5;
-      font-size: 12px;
+      font-size: 13px;
       letter-spacing: .5px;
       font-weight: fontWeight("normal");
 
@@ -251,5 +252,14 @@
       width: 100%;
       white-space: normal;
     }
+    .guantee-text {
+      font-size: 13px;
+      font-weight: 400;
+    }
+  }
+  .pdp-fit-links {
+    margin-top: -15px;
+    font-weight: 400;
+    font-size: 13px;
   }
 }

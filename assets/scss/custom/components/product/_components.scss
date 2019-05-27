@@ -258,9 +258,38 @@
     }
   }
   .pdp-fit-links {
-    margin-top: -15px;
+    margin-top: -12px;
     font-weight: 400;
     font-size: 13px;
+  }
+
+  .pdp-description-tabs {
+    p {
+      font-size: 13px;
+      font-weight: fontWeight("normal");
+    }
+    .tabs {
+      .tab {
+        display: table-cell;
+        width: 1%;
+        float: none;
+        a {
+          width: 100%;
+          text-align: center;
+          font-weight:  fontWeight("bold");
+          padding: 5px 10px;
+          border: solid 1px transparent;
+          color: rgba(10, 10, 10, 0.95) !important;
+        }
+        
+        &.is-active a {
+          border-bottom: solid 1px #0A0A0A;
+        }
+      }
+    }
+    .tab-content {
+      padding: .5rem 0;
+    }
   }
 }
 

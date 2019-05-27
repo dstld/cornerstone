@@ -854,6 +854,7 @@ export default class ProductDetails {
                     settings: {
                         slidesToShow: 1,
                         slidesToScroll: 1,
+                        centerMode: true,
                     },
                 },
             ],

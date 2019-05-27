@@ -20,7 +20,8 @@ export default class MobileImageSlick {
     }
 
     setMainImage() {
-        $('.mobile-zoom-container .mobile-zoomviewer-image').attr('src', this.$mainImage);
+        $('.mobile-zoom-container .mobile-zoomviewer-image').attr('data-src', this.$mainImage);
+        $('.mobile-zoom-container .mobile-zoomviewer-image').addClass('lazyload');
     }
 
     imageLoaded() {
@@ -34,7 +35,8 @@ export default class MobileImageSlick {
     bindEvents() {
         $('.pdp-mobile-flexslider').on('afterChange', (event, slick, currentSlide) => {
             const selectedProductImage = $(`#pdp-mobile-flexslider [data-slick-index=${currentSlide}]`).data('thumb');
-            $('.mobile-zoom-container .mobile-zoomviewer-image').attr('src', selectedProductImage);
+            $('.mobile-zoom-container .mobile-zoomviewer-image').attr('data-src', selectedProductImage);
+            $('.mobile-zoom-container .mobile-zoomviewer-image').addClass('lazyload');
         });
 
         // Open Image Viewer

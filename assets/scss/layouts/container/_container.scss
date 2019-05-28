@@ -6,6 +6,8 @@
 .row {
     max-width: unset;
     width: auto;
+    &:before, &:after {display: none !important;}
+
 }
 
 .pdp {

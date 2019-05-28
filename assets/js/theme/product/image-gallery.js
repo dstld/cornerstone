@@ -11,6 +11,7 @@ export default class ImageGallery {
             animation: 'fade',
             controlNav: 'thumbnails',
             animationLoop: false,
+            slideshow: false,
         });
     }
 }

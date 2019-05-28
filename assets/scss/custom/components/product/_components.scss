@@ -54,6 +54,12 @@
         opacity: 1;
       }
     }
+    .zoomviewer-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      visibility: hidden;
+    }
   }
   .pdp-details {
     margin-top: 2px;
@@ -376,5 +382,14 @@
           content: "\f002";
         }
       }
+  }
+}
+
+.zoomContainer {
+  z-index: 100;
+
+  .zoomLens {
+    max-width: 140px;
+    max-height: 140px;
   }
 }

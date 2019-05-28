@@ -14,11 +14,12 @@
                     {{#each product.images}}
                         <li data-thumb="{{getImage this 'zoom_size'}}">
                             <img 
-                                class="lazyload"
+                                class="lazyload desktop-slide-img"
                                 data-sizes="auto"
                                 src="{{cdn 'img/logo-d-spacer.png'}}" 
                                 data-src="{{getImage this 'zoom_size'}}"
-                            >
+                            />
+                            <img class="zoomviewer-img" src="{{getImage this 'zoom_size'}}" data-zoom-image="{{getImage this 'zoom_size'}}"/>
                         </li>
                     {{/each}}
                 </ul>

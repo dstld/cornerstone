@@ -1,14 +1,17 @@
+/* eslint-disable func-names */
 import utils from '@bigcommerce/stencil-utils';
 import 'foundation-sites/js/foundation/foundation';
 import 'foundation-sites/js/foundation/foundation.reveal';
+import 'jquery-lazy';
+import 'slick-carousel';
+import '@zeitiger/elevatezoom';
+
 import ImageGallery from '../product/image-gallery';
 import MobileImageSlick from '../product/mobile-image-carousel';
 
 import modalFactory, { showAlertModal } from '../global/modal';
 import _ from 'lodash';
 import Wishlist from '../wishlist';
-import 'jquery-lazy';
-import 'slick-carousel';
 
 export default class ProductDetails {
     constructor($scope, context, productAttributesData = {}) {
@@ -24,10 +27,24 @@ export default class ProductDetails {
         Wishlist.load(this.context);
         this.getTabRequests();
 
+        $('.desktop-slide-img').on('click', function () {
+            $(this).siblings('.zoomviewer-img').css('visibility', 'visible');
+            $(this).siblings('.zoomviewer-img').elevateZoom({
+                cursor: 'crosshair',
+                borderSize: 1,
+                zoomWindowWidth: 400,
+                zoomWindowHeight: 400,
+            });
+        });
+
+        $('.zoomviewer-img').on('click', () => {
+            $('.zoomviewer-img').css('visibility', 'hidden');
+            $('.zoomContainer').remove();
+        });
+
         const $form = $('form[data-cart-item-add]', $scope);
         this.listPurchasableSkus();
         const $productOptionsElement = $('[data-product-option-change]', $form);
-        console.log('----------', $productOptionsElement);
         const hasOptions = $productOptionsElement.html().trim().length;
         const hasDefaultOptions = $productOptionsElement.find('[data-default]').length;
 

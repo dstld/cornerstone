@@ -8,6 +8,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "@bigcommerce/stencil-utils": "^4.1.0",
+    "@zeitiger/elevatezoom": "^2.5.4",
     "bootstrap": "^4.3.1",
     "creditcards": "^3.0.1",
     "easyzoom": "^2.5.0",
